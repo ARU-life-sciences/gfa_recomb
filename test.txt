@@ -1,0 +1,2032 @@
+Acaena_ovalifolia
+ID	Size	Incoming	Outgoing
+u27	8341		u28,u29,u28,u29
+Possible paths:
+u27 -> u28
+u27 -> u29
+u27 -> u28
+u27 -> u29
+
+Acer_campestre
+ID	Size	Incoming	Outgoing
+u75	2409	u71,u73	u76,u76
+Possible paths:
+u71 -> u75 -> u76
+u71 -> u75 -> u76
+u73 -> u75 -> u76
+u73 -> u75 -> u76
+
+ID	Size	Incoming	Outgoing
+u77	6463	u72,u74	u78,u78
+Possible paths:
+u72 -> u77 -> u78
+u72 -> u77 -> u78
+u74 -> u77 -> u78
+u74 -> u77 -> u78
+
+Adonis_annua
+Aesculus_hippocastanum
+ID	Size	Incoming	Outgoing
+u29	3860	u1	u30,u31,u30
+Possible paths:
+u1 -> u29 -> u30
+u1 -> u29 -> u31
+u1 -> u29 -> u30
+
+ID	Size	Incoming	Outgoing
+u141	1344	u1,u34,u35,u35	
+Possible paths:
+u1 -> u141
+u34 -> u141
+u35 -> u141
+u35 -> u141
+
+Agrostemma_githago
+Ailanthus_altissima
+ID	Size	Incoming	Outgoing
+u41	3521	u39,u39,u40,u40	
+Possible paths:
+u39 -> u41
+u39 -> u41
+u40 -> u41
+u40 -> u41
+
+Ajuga_chamaepitys
+ID	Size	Incoming	Outgoing
+u25	6168		u28,u28,u26,u27
+Possible paths:
+u25 -> u28
+u25 -> u28
+u25 -> u26
+u25 -> u27
+
+ID	Size	Incoming	Outgoing
+u29	9580	u26,u27	u30,u30
+Possible paths:
+u26 -> u29 -> u30
+u26 -> u29 -> u30
+u27 -> u29 -> u30
+u27 -> u29 -> u30
+
+Alisma_plantago_aquatica
+ID	Size	Incoming	Outgoing
+u18	3903	u17	u20,u21,u19
+Possible paths:
+u17 -> u18 -> u20
+u17 -> u18 -> u21
+u17 -> u18 -> u19
+
+ID	Size	Incoming	Outgoing
+u23	3364	u19,u20,u22	u24
+Possible paths:
+u19 -> u23 -> u24
+u20 -> u23 -> u24
+u22 -> u23 -> u24
+
+ID	Size	Incoming	Outgoing
+u26	2203	u21,u24,u25	u27
+Possible paths:
+u21 -> u26 -> u27
+u24 -> u26 -> u27
+u25 -> u26 -> u27
+
+Alnus_glutinosa
+Alnus_incana
+Ammi_majus
+ID	Size	Incoming	Outgoing
+u110	1751	u100	u111,u111,u112
+Possible paths:
+u100 -> u110 -> u111
+u100 -> u110 -> u111
+u100 -> u110 -> u112
+
+Antitrichia_curtipendula
+Aponogeton_distachyos
+ID	Size	Incoming	Outgoing
+u30	3832	u28,u29	u31,u31
+Possible paths:
+u28 -> u30 -> u31
+u28 -> u30 -> u31
+u29 -> u30 -> u31
+u29 -> u30 -> u31
+
+ID	Size	Incoming	Outgoing
+u32	1476	u28,u29	u33,u33
+Possible paths:
+u28 -> u32 -> u33
+u28 -> u32 -> u33
+u29 -> u32 -> u33
+u29 -> u32 -> u33
+
+Aquilegia_vulgaris
+Arabidopsis_thaliana
+ID	Size	Incoming	Outgoing
+u66	3130	u64,u65	u67,u68
+Possible paths:
+u64 -> u66 -> u67
+u64 -> u66 -> u68
+u65 -> u66 -> u67
+u65 -> u66 -> u68
+
+ID	Size	Incoming	Outgoing
+u69	4731	u64,u65,u67,u68	
+Possible paths:
+u64 -> u69
+u65 -> u69
+u67 -> u69
+u68 -> u69
+
+Arabis_hirsuta
+ID	Size	Incoming	Outgoing
+u33	2678	u31	u34,u35,u34
+Possible paths:
+u31 -> u33 -> u34
+u31 -> u33 -> u35
+u31 -> u33 -> u34
+
+ID	Size	Incoming	Outgoing
+u36	6851	u29,u30,u32,u35	
+Possible paths:
+u29 -> u36
+u30 -> u36
+u32 -> u36
+u35 -> u36
+
+Arctium_minus
+ID	Size	Incoming	Outgoing
+u17	6024	u15,u16	u18,u19
+Possible paths:
+u15 -> u17 -> u18
+u15 -> u17 -> u19
+u16 -> u17 -> u18
+u16 -> u17 -> u19
+
+ID	Size	Incoming	Outgoing
+u20	5413	u16,u18,u19	u21
+Possible paths:
+u16 -> u20 -> u21
+u18 -> u20 -> u21
+u19 -> u20 -> u21
+
+Arenaria_serpyllifolia
+ID	Size	Incoming	Outgoing
+u64	3103	u61,u62,u63,u63	
+Possible paths:
+u61 -> u64
+u62 -> u64
+u63 -> u64
+u63 -> u64
+
+Astragalus_alpinus
+ID	Size	Incoming	Outgoing
+u58	4082	u56,u57	u59,u60
+Possible paths:
+u56 -> u58 -> u59
+u56 -> u58 -> u60
+u57 -> u58 -> u59
+u57 -> u58 -> u60
+
+Astragalus_glycyphyllos
+ID	Size	Incoming	Outgoing
+u40	2652	u38,u38,u39,u39	
+Possible paths:
+u38 -> u40
+u38 -> u40
+u39 -> u40
+u39 -> u40
+
+Ballota_nigra
+Barbarea_vulgaris
+Berberis_vulgaris
+Blitum_bonus_henricus
+ID	Size	Incoming	Outgoing
+u34	3487	u33	u36,u37,u35
+Possible paths:
+u33 -> u34 -> u36
+u33 -> u34 -> u37
+u33 -> u34 -> u35
+
+ID	Size	Incoming	Outgoing
+u39	1416	u32,u37,u38,u38	
+Possible paths:
+u32 -> u39
+u37 -> u39
+u38 -> u39
+u38 -> u39
+
+Brassica_nigra
+ID	Size	Incoming	Outgoing
+u42	5338	u40,u40,u41,u41	
+Possible paths:
+u40 -> u42
+u40 -> u42
+u41 -> u42
+u41 -> u42
+
+Bromus_sterilis
+ID	Size	Incoming	Outgoing
+u47	7244	u45	u49,u50,u48
+Possible paths:
+u45 -> u47 -> u49
+u45 -> u47 -> u50
+u45 -> u47 -> u48
+
+ID	Size	Incoming	Outgoing
+u96	1375	u40,u44,u50,u51	
+Possible paths:
+u40 -> u96
+u44 -> u96
+u50 -> u96
+u51 -> u96
+
+Bryoerythrophyllum_caledonicum
+Buxus_sempervirens
+ID	Size	Incoming	Outgoing
+u11	9139	u11	u11,u12,u20
+Possible paths:
+u11 -> u11 -> u11
+u11 -> u11 -> u12
+u11 -> u11 -> u20
+
+ID	Size	Incoming	Outgoing
+u14	5920	u12,u13,u13	u15
+Possible paths:
+u12 -> u14 -> u15
+u13 -> u14 -> u15
+u13 -> u14 -> u15
+
+ID	Size	Incoming	Outgoing
+u17	4312	u15,u16	u18,u19
+Possible paths:
+u15 -> u17 -> u18
+u15 -> u17 -> u19
+u16 -> u17 -> u18
+u16 -> u17 -> u19
+
+ID	Size	Incoming	Outgoing
+u24	8012	u16,u23,u23	u25
+Possible paths:
+u16 -> u24 -> u25
+u23 -> u24 -> u25
+u23 -> u24 -> u25
+
+Calendula_officinalis
+ID	Size	Incoming	Outgoing
+u51	4431	u49,u50	u53,u52
+Possible paths:
+u49 -> u51 -> u53
+u49 -> u51 -> u52
+u50 -> u51 -> u53
+u50 -> u51 -> u52
+
+Calliergon_cordifolium
+Callitriche_obtusangula
+Calluna_vulgaris
+ID	Size	Incoming	Outgoing
+u150	9929		u151,u152,u151,u152
+Possible paths:
+u150 -> u151
+u150 -> u152
+u150 -> u151
+u150 -> u152
+
+Calystegia_soldanella
+ID	Size	Incoming	Outgoing
+u30	5830	u23	u32,u33,u31
+Possible paths:
+u23 -> u30 -> u32
+u23 -> u30 -> u33
+u23 -> u30 -> u31
+
+Cardamine_flexuosa
+Cardamine_hirsuta
+Carduus_nutans
+Carex_acutiformis
+ID	Size	Incoming	Outgoing
+u34	5410	u24,u30,u32,u33	
+Possible paths:
+u24 -> u34
+u30 -> u34
+u32 -> u34
+u33 -> u34
+
+Carex_arenaria
+ID	Size	Incoming	Outgoing
+u100	3974	u93	u103,u101,u102
+Possible paths:
+u93 -> u100 -> u103
+u93 -> u100 -> u101
+u93 -> u100 -> u102
+
+Carex_caryophyllea
+ID	Size	Incoming	Outgoing
+u29	4410	u25,u28	u31,u30
+Possible paths:
+u25 -> u29 -> u31
+u25 -> u29 -> u30
+u28 -> u29 -> u31
+u28 -> u29 -> u30
+
+ID	Size	Incoming	Outgoing
+u33	1645	u21,u27	u34,u34
+Possible paths:
+u21 -> u33 -> u34
+u21 -> u33 -> u34
+u27 -> u33 -> u34
+u27 -> u33 -> u34
+
+Carex_depauperata
+Carex_distans
+ID	Size	Incoming	Outgoing
+u11	8238	u9,u10,u10	u12
+Possible paths:
+u9 -> u11 -> u12
+u10 -> u11 -> u12
+u10 -> u11 -> u12
+
+Carex_divulsa
+ID	Size	Incoming	Outgoing
+u21	7580	u19,u20,u20	u22
+Possible paths:
+u19 -> u21 -> u22
+u20 -> u21 -> u22
+u20 -> u21 -> u22
+
+Carex_extensa
+ID	Size	Incoming	Outgoing
+u38	9264	u33,u36,u37	u39
+Possible paths:
+u33 -> u38 -> u39
+u36 -> u38 -> u39
+u37 -> u38 -> u39
+
+ID	Size	Incoming	Outgoing
+u42	5534	u30,u34,u37,u41	
+Possible paths:
+u30 -> u42
+u34 -> u42
+u37 -> u42
+u41 -> u42
+
+ID	Size	Incoming	Outgoing
+u43	4109	u35,u39	u44,u44
+Possible paths:
+u35 -> u43 -> u44
+u35 -> u43 -> u44
+u39 -> u43 -> u44
+u39 -> u43 -> u44
+
+Carex_hirta
+ID	Size	Incoming	Outgoing
+u470	9651	u461,u462,u467,u469	
+Possible paths:
+u461 -> u470
+u462 -> u470
+u467 -> u470
+u469 -> u470
+
+Carex_laevigata
+Carex_nigra
+ID	Size	Incoming	Outgoing
+u18	3369	u16,u17	u19,u20
+Possible paths:
+u16 -> u18 -> u19
+u16 -> u18 -> u20
+u17 -> u18 -> u19
+u17 -> u18 -> u20
+
+ID	Size	Incoming	Outgoing
+u26	7054	u22,u24,u25,u25	
+Possible paths:
+u22 -> u26
+u24 -> u26
+u25 -> u26
+u25 -> u26
+
+ID	Size	Incoming	Outgoing
+u112	1421	u14,u15,u20,u23	
+Possible paths:
+u14 -> u112
+u15 -> u112
+u20 -> u112
+u23 -> u112
+
+Carex_pendula
+ID	Size	Incoming	Outgoing
+u31	9709	u28	u34,u32,u33
+Possible paths:
+u28 -> u31 -> u34
+u28 -> u31 -> u32
+u28 -> u31 -> u33
+
+ID	Size	Incoming	Outgoing
+u40	5915	u35,u39	u41,u42
+Possible paths:
+u35 -> u40 -> u41
+u35 -> u40 -> u42
+u39 -> u40 -> u41
+u39 -> u40 -> u42
+
+Carex_riparia.k1001.s31.c10
+ID	Size	Incoming	Outgoing
+u7340	1426	u7338,u7339	u7341,u7342
+Possible paths:
+u7338 -> u7340 -> u7341
+u7338 -> u7340 -> u7342
+u7339 -> u7340 -> u7341
+u7339 -> u7340 -> u7342
+
+ID	Size	Incoming	Outgoing
+u7349	6514	u7339,u7346	u7350,u7351
+Possible paths:
+u7339 -> u7349 -> u7350
+u7339 -> u7349 -> u7351
+u7346 -> u7349 -> u7350
+u7346 -> u7349 -> u7351
+
+ID	Size	Incoming	Outgoing
+u7353	5231	u7345,u7348,u7352,u7352	
+Possible paths:
+u7345 -> u7353
+u7348 -> u7353
+u7352 -> u7353
+u7352 -> u7353
+
+Carex_riparia.k1001.s31.c20
+ID	Size	Incoming	Outgoing
+u558	1426	u556,u557	u559,u560
+Possible paths:
+u556 -> u558 -> u559
+u556 -> u558 -> u560
+u557 -> u558 -> u559
+u557 -> u558 -> u560
+
+ID	Size	Incoming	Outgoing
+u567	6514	u557,u564	u568,u569
+Possible paths:
+u557 -> u567 -> u568
+u557 -> u567 -> u569
+u564 -> u567 -> u568
+u564 -> u567 -> u569
+
+ID	Size	Incoming	Outgoing
+u571	5231	u563,u566,u570,u570	
+Possible paths:
+u563 -> u571
+u566 -> u571
+u570 -> u571
+u570 -> u571
+
+Carex_riparia.k1001.s31.c40
+ID	Size	Incoming	Outgoing
+u180	1426	u178,u179	u181,u182
+Possible paths:
+u178 -> u180 -> u181
+u178 -> u180 -> u182
+u179 -> u180 -> u181
+u179 -> u180 -> u182
+
+ID	Size	Incoming	Outgoing
+u189	6514	u179,u186	u190,u191
+Possible paths:
+u179 -> u189 -> u190
+u179 -> u189 -> u191
+u186 -> u189 -> u190
+u186 -> u189 -> u191
+
+ID	Size	Incoming	Outgoing
+u193	5231	u185,u188,u192,u192	
+Possible paths:
+u185 -> u193
+u188 -> u193
+u192 -> u193
+u192 -> u193
+
+Carex_riparia
+ID	Size	Incoming	Outgoing
+u68	1426	u66,u67	u69,u70
+Possible paths:
+u66 -> u68 -> u69
+u66 -> u68 -> u70
+u67 -> u68 -> u69
+u67 -> u68 -> u70
+
+ID	Size	Incoming	Outgoing
+u77	6514	u67,u74	u78,u79
+Possible paths:
+u67 -> u77 -> u78
+u67 -> u77 -> u79
+u74 -> u77 -> u78
+u74 -> u77 -> u79
+
+ID	Size	Incoming	Outgoing
+u81	5231	u73,u76,u80,u80	
+Possible paths:
+u73 -> u81
+u76 -> u81
+u80 -> u81
+u80 -> u81
+
+Carex_rostrata
+ID	Size	Incoming	Outgoing
+u92	7675	u84,u90,u91	u93
+Possible paths:
+u84 -> u92 -> u93
+u90 -> u92 -> u93
+u91 -> u92 -> u93
+
+Carex_sylvatica
+ID	Size	Incoming	Outgoing
+u11	7786		u14,u15,u12,u13
+Possible paths:
+u11 -> u14
+u11 -> u15
+u11 -> u12
+u11 -> u13
+
+Carlina_vulgaris
+ID	Size	Incoming	Outgoing
+u1	5522		u4,u5,u2,u3
+Possible paths:
+u1 -> u4
+u1 -> u5
+u1 -> u2
+u1 -> u3
+
+ID	Size	Incoming	Outgoing
+u11	3775	u2,u3,u7,u9	
+Possible paths:
+u2 -> u11
+u3 -> u11
+u7 -> u11
+u9 -> u11
+
+ID	Size	Incoming	Outgoing
+u21	1360	u6,u8,u9,u10	
+Possible paths:
+u6 -> u21
+u8 -> u21
+u9 -> u21
+u10 -> u21
+
+Chamaenerion_angustifolium
+Chenopodium_album
+ID	Size	Incoming	Outgoing
+u11	2042		u14,u15,u12,u13
+Possible paths:
+u11 -> u14
+u11 -> u15
+u11 -> u12
+u11 -> u13
+
+ID	Size	Incoming	Outgoing
+u16	6634	u12,u13,u14,u15	
+Possible paths:
+u12 -> u16
+u13 -> u16
+u14 -> u16
+u15 -> u16
+
+Cirsium_eriophorum
+ID	Size	Incoming	Outgoing
+u77	2131		u80,u81,u78,u79
+Possible paths:
+u77 -> u80
+u77 -> u81
+u77 -> u78
+u77 -> u79
+
+Climacium_dendroides
+Comarum_palustre
+ID	Size	Incoming	Outgoing
+u32	7710	u30,u31	u34,u33
+Possible paths:
+u30 -> u32 -> u34
+u30 -> u32 -> u33
+u31 -> u32 -> u34
+u31 -> u32 -> u33
+
+Convolvulus_arvensis
+ID	Size	Incoming	Outgoing
+u216	1791	u214,u215	u217,u218
+Possible paths:
+u214 -> u216 -> u217
+u214 -> u216 -> u218
+u215 -> u216 -> u217
+u215 -> u216 -> u218
+
+Cornus_suecica
+Corylus_avellana
+Crataegus_laevigata
+ID	Size	Incoming	Outgoing
+u71	5086	u69,u70	u73,u72
+Possible paths:
+u69 -> u71 -> u73
+u69 -> u71 -> u72
+u70 -> u71 -> u73
+u70 -> u71 -> u72
+
+ID	Size	Incoming	Outgoing
+u79	2851	u75,u76,u77,u78	
+Possible paths:
+u75 -> u79
+u76 -> u79
+u77 -> u79
+u78 -> u79
+
+Cratoneuron_filicinum
+Cruciata_laevipes
+Cymbalaria_muralis
+Cyperus_fuscus
+ID	Size	Incoming	Outgoing
+u254	8800	u9,u253	u255,u256
+Possible paths:
+u9 -> u254 -> u255
+u9 -> u254 -> u256
+u253 -> u254 -> u255
+u253 -> u254 -> u256
+
+ID	Size	Incoming	Outgoing
+u257	2700	u9,u253,u256	u258
+Possible paths:
+u9 -> u257 -> u258
+u253 -> u257 -> u258
+u256 -> u257 -> u258
+
+ID	Size	Incoming	Outgoing
+u259	9974	u255,u258	u260,u260
+Possible paths:
+u255 -> u259 -> u260
+u255 -> u259 -> u260
+u258 -> u259 -> u260
+u258 -> u259 -> u260
+
+Digitaria_sanguinalis
+ID	Size	Incoming	Outgoing
+u75	3776	u72,u74	u76,u77
+Possible paths:
+u72 -> u75 -> u76
+u72 -> u75 -> u77
+u74 -> u75 -> u76
+u74 -> u75 -> u77
+
+ID	Size	Incoming	Outgoing
+u81	2956	u70,u78	u83,u82
+Possible paths:
+u70 -> u81 -> u83
+u70 -> u81 -> u82
+u78 -> u81 -> u83
+u78 -> u81 -> u82
+
+Draba_incana
+Draba_verna
+Dryas_octopetala
+Eleocharis_quinqueflora
+ID	Size	Incoming	Outgoing
+u39	2995	u33,u34,u37	u40,u41
+Possible paths:
+u33 -> u39 -> u40
+u33 -> u39 -> u41
+u34 -> u39 -> u40
+u34 -> u39 -> u41
+u37 -> u39 -> u40
+u37 -> u39 -> u41
+
+ID	Size	Incoming	Outgoing
+u284	1435	u29,u30,u31,u32	
+Possible paths:
+u29 -> u284
+u30 -> u284
+u31 -> u284
+u32 -> u284
+
+Epilobium_hirsutum
+Eriophorum_vaginatum.k1001.s31.c40
+ID	Size	Incoming	Outgoing
+u91	1651		u94,u95,u92,u93
+Possible paths:
+u91 -> u94
+u91 -> u95
+u91 -> u92
+u91 -> u93
+
+ID	Size	Incoming	Outgoing
+u103	6161	u93,u98,u99	u104
+Possible paths:
+u93 -> u103 -> u104
+u98 -> u103 -> u104
+u99 -> u103 -> u104
+
+ID	Size	Incoming	Outgoing
+u105	9539	u96,u101,u102,u104	
+Possible paths:
+u96 -> u105
+u101 -> u105
+u102 -> u105
+u104 -> u105
+
+Eriophorum_vaginatum
+ID	Size	Incoming	Outgoing
+u27	1651	u24	u29,u30,u28
+Possible paths:
+u24 -> u27 -> u29
+u24 -> u27 -> u30
+u24 -> u27 -> u28
+
+ID	Size	Incoming	Outgoing
+u34	6161	u28,u33	u35,u36
+Possible paths:
+u28 -> u34 -> u35
+u28 -> u34 -> u36
+u33 -> u34 -> u35
+u33 -> u34 -> u36
+
+ID	Size	Incoming	Outgoing
+u37	9539	u25,u26,u31,u35	
+Possible paths:
+u25 -> u37
+u26 -> u37
+u31 -> u37
+u35 -> u37
+
+Erodium_maritimum
+ID	Size	Incoming	Outgoing
+u57	3609	u53,u55,u56	u58
+Possible paths:
+u53 -> u57 -> u58
+u55 -> u57 -> u58
+u56 -> u57 -> u58
+
+ID	Size	Incoming	Outgoing
+u60	5062	u56,u58,u59,u59	
+Possible paths:
+u56 -> u60
+u58 -> u60
+u59 -> u60
+u59 -> u60
+
+ID	Size	Incoming	Outgoing
+u136	1427	u53,u54,u54,u55	
+Possible paths:
+u53 -> u136
+u54 -> u136
+u54 -> u136
+u55 -> u136
+
+Erodium_moschatum
+Euonymus_europaeus
+ID	Size	Incoming	Outgoing
+u20	8279	u17	u23,u21,u22
+Possible paths:
+u17 -> u20 -> u23
+u17 -> u20 -> u21
+u17 -> u20 -> u22
+
+ID	Size	Incoming	Outgoing
+u31	3047	u27,u29,u30,u30	
+Possible paths:
+u27 -> u31
+u29 -> u31
+u30 -> u31
+u30 -> u31
+
+Euphorbia_lathyris
+ID	Size	Incoming	Outgoing
+u5	6620		u7,u8,u6,u6
+Possible paths:
+u5 -> u7
+u5 -> u8
+u5 -> u6
+u5 -> u6
+
+ID	Size	Incoming	Outgoing
+u15	6406	u8,u13	u16,u16
+Possible paths:
+u8 -> u15 -> u16
+u8 -> u15 -> u16
+u13 -> u15 -> u16
+u13 -> u15 -> u16
+
+Euphorbia_maculata
+ID	Size	Incoming	Outgoing
+u18	9930	u17,u17	u19,u20
+Possible paths:
+u17 -> u18 -> u19
+u17 -> u18 -> u20
+u17 -> u18 -> u19
+u17 -> u18 -> u20
+
+ID	Size	Incoming	Outgoing
+u22	5565	u19,u20,u21,u21	
+Possible paths:
+u19 -> u22
+u20 -> u22
+u21 -> u22
+u21 -> u22
+
+Euphorbia_peplus
+ID	Size	Incoming	Outgoing
+u89	1403	u36,u36,u37,u38	
+Possible paths:
+u36 -> u89
+u36 -> u89
+u37 -> u89
+u38 -> u89
+
+Euphrasia_confusa
+ID	Size	Incoming	Outgoing
+u46	2529	u44,u45	u47,u48
+Possible paths:
+u44 -> u46 -> u47
+u44 -> u46 -> u48
+u45 -> u46 -> u47
+u45 -> u46 -> u48
+
+ID	Size	Incoming	Outgoing
+u49	9317	u47	u50,u51,u50
+Possible paths:
+u47 -> u49 -> u50
+u47 -> u49 -> u51
+u47 -> u49 -> u50
+
+ID	Size	Incoming	Outgoing
+u196	1368	u44,u45,u48,u51	
+Possible paths:
+u44 -> u196
+u45 -> u196
+u48 -> u196
+u51 -> u196
+
+Fagus_sylvatica
+Fallopia_convolvulus
+ID	Size	Incoming	Outgoing
+u8	3872	u7	u10,u11,u9
+Possible paths:
+u7 -> u8 -> u10
+u7 -> u8 -> u11
+u7 -> u8 -> u9
+
+Filago_lutescens
+Filipendula_ulmaria
+ID	Size	Incoming	Outgoing
+u55	2890		u58,u58,u56,u57
+Possible paths:
+u55 -> u58
+u55 -> u58
+u55 -> u56
+u55 -> u57
+
+ID	Size	Incoming	Outgoing
+u64	2551	u62,u63	u65,u65
+Possible paths:
+u62 -> u64 -> u65
+u62 -> u64 -> u65
+u63 -> u64 -> u65
+u63 -> u64 -> u65
+
+Fragaria_moschata
+Fragaria_vesca
+ID	Size	Incoming	Outgoing
+u40	3158	u35,u39	u41,u42
+Possible paths:
+u35 -> u40 -> u41
+u35 -> u40 -> u42
+u39 -> u40 -> u41
+u39 -> u40 -> u42
+
+Frangula_alnus
+ID	Size	Incoming	Outgoing
+u26	6520		u29,u30,u27,u28
+Possible paths:
+u26 -> u29
+u26 -> u30
+u26 -> u27
+u26 -> u28
+
+ID	Size	Incoming	Outgoing
+u31	6054	u27,u28,u29,u30	
+Possible paths:
+u27 -> u31
+u28 -> u31
+u29 -> u31
+u30 -> u31
+
+Galatella_linosyris
+ID	Size	Incoming	Outgoing
+u20	5029	u18,u18,u19,u19	
+Possible paths:
+u18 -> u20
+u18 -> u20
+u19 -> u20
+u19 -> u20
+
+Galeopsis_tetrahit
+ID	Size	Incoming	Outgoing
+u50	9092	u48,u48,u49,u49	
+Possible paths:
+u48 -> u50
+u48 -> u50
+u49 -> u50
+u49 -> u50
+
+Galium_aparine
+Galium_uliginosum
+Geranium_molle
+Geranium_rotundifolium
+ID	Size	Incoming	Outgoing
+u57	3991	u56,u56	u58,u58
+Possible paths:
+u56 -> u57 -> u58
+u56 -> u57 -> u58
+u56 -> u57 -> u58
+u56 -> u57 -> u58
+
+Geum_rivale
+Geum_urbanum
+Gnaphalium_supinum
+Gnaphalium_uliginosum
+Hedera_helix
+Herbertus_hutchinsiae
+Heterocladium_heteropterum
+Hibiscus_tridactylites
+ID	Size	Incoming	Outgoing
+u38	2806	u32,u36	u39,u39
+Possible paths:
+u32 -> u38 -> u39
+u32 -> u38 -> u39
+u36 -> u38 -> u39
+u36 -> u38 -> u39
+
+Hibiscus_verdcourtii
+ID	Size	Incoming	Outgoing
+u23	2535		u24,u26,u24,u25
+Possible paths:
+u23 -> u24
+u23 -> u26
+u23 -> u24
+u23 -> u25
+
+ID	Size	Incoming	Outgoing
+u103	1428	u25,u26,u27,u27	
+Possible paths:
+u25 -> u103
+u26 -> u103
+u27 -> u103
+u27 -> u103
+
+Humulus_lupulus
+Hydrocotyle_vulgaris
+ID	Size	Incoming	Outgoing
+u54	2179	u52,u53,u53	u55
+Possible paths:
+u52 -> u54 -> u55
+u53 -> u54 -> u55
+u53 -> u54 -> u55
+
+Hyocomium_armoricum
+Hypericum_androsaemum
+Hypericum_hirsutum
+ID	Size	Incoming	Outgoing
+u65	9094	u63,u63,u64,u64	
+Possible paths:
+u63 -> u65
+u63 -> u65
+u64 -> u65
+u64 -> u65
+
+Hypericum_pulchrum
+ID	Size	Incoming	Outgoing
+u53	1774	u52,u52	u54,u54
+Possible paths:
+u52 -> u53 -> u54
+u52 -> u53 -> u54
+u52 -> u53 -> u54
+u52 -> u53 -> u54
+
+Hypnum_cupressiforme
+Ilex_aquifolium
+Impatiens_glandulifera
+Impatiens_parviflora
+Iris_foetidissima
+Isopterygiella_pulchella
+Isothecium_myosuroides
+Jacobaea_maritima
+ID	Size	Incoming	Outgoing
+u130	9079	u128,u129	u131,u132
+Possible paths:
+u128 -> u130 -> u131
+u128 -> u130 -> u132
+u129 -> u130 -> u131
+u129 -> u130 -> u132
+
+Jacobaea_vulgaris
+Jasione_montana
+Juncus_effusus
+Juncus_squarrosus
+Laburnum_anagyroides
+ID	Size	Incoming	Outgoing
+u19	9202	u2,u2	u20,u20
+Possible paths:
+u2 -> u19 -> u20
+u2 -> u19 -> u20
+u2 -> u19 -> u20
+u2 -> u19 -> u20
+
+Lamium_amplexicaule
+ID	Size	Incoming	Outgoing
+u23	9485		u25,u26,u24,u25
+Possible paths:
+u23 -> u25
+u23 -> u26
+u23 -> u24
+u23 -> u25
+
+ID	Size	Incoming	Outgoing
+u28	1552	u24,u26,u27,u27	
+Possible paths:
+u24 -> u28
+u26 -> u28
+u27 -> u28
+u27 -> u28
+
+Lamium_purpureum
+Lapsana_communis
+ID	Size	Incoming	Outgoing
+u43	2090	u42	u45,u46,u44
+Possible paths:
+u42 -> u43 -> u45
+u42 -> u43 -> u46
+u42 -> u43 -> u44
+
+Lathyrus_aphaca
+ID	Size	Incoming	Outgoing
+u8	7926		u9,u10,u9,u10
+Possible paths:
+u8 -> u9
+u8 -> u10
+u8 -> u9
+u8 -> u10
+
+Lathyrus_linifolius
+ID	Size	Incoming	Outgoing
+u3	6002		u6,u7,u4,u5
+Possible paths:
+u3 -> u6
+u3 -> u7
+u3 -> u4
+u3 -> u5
+
+ID	Size	Incoming	Outgoing
+u9	7519	u6,u8	u10,u11
+Possible paths:
+u6 -> u9 -> u10
+u6 -> u9 -> u11
+u8 -> u9 -> u10
+u8 -> u9 -> u11
+
+ID	Size	Incoming	Outgoing
+u13	1796	u4,u11	u15,u14
+Possible paths:
+u4 -> u13 -> u15
+u4 -> u13 -> u14
+u11 -> u13 -> u15
+u11 -> u13 -> u14
+
+ID	Size	Incoming	Outgoing
+u18	5679	u8,u12,u14,u17	
+Possible paths:
+u8 -> u18
+u12 -> u18
+u14 -> u18
+u17 -> u18
+
+Leersia_oryzoides
+Lemna_minuta
+Lepidium_didymum
+Ligustrum_vulgare
+Linaria_vulgaris
+ID	Size	Incoming	Outgoing
+u15	8575	u2,u2	u16,u16
+Possible paths:
+u2 -> u15 -> u16
+u2 -> u15 -> u16
+u2 -> u15 -> u16
+u2 -> u15 -> u16
+
+Lobelia_dortmanna
+ID	Size	Incoming	Outgoing
+u25	2844	u1,u2,u20	u26
+Possible paths:
+u1 -> u25 -> u26
+u2 -> u25 -> u26
+u20 -> u25 -> u26
+
+ID	Size	Incoming	Outgoing
+u33	2897	u3,u4,u26	u34
+Possible paths:
+u3 -> u33 -> u34
+u4 -> u33 -> u34
+u26 -> u33 -> u34
+
+Lobelia_urens
+ID	Size	Incoming	Outgoing
+u1080	3115	u1076,u1078	u1082,u1081
+Possible paths:
+u1076 -> u1080 -> u1082
+u1076 -> u1080 -> u1081
+u1078 -> u1080 -> u1082
+u1078 -> u1080 -> u1081
+
+ID	Size	Incoming	Outgoing
+u1083	2999	u1082	u1085,u1086,u1084
+Possible paths:
+u1082 -> u1083 -> u1085
+u1082 -> u1083 -> u1086
+u1082 -> u1083 -> u1084
+
+Logfia_minima
+Lunularia_cruciata
+Luzula_pallescens
+ID	Size	Incoming	Outgoing
+u22	4334		u24,u24,u23,u23
+Possible paths:
+u22 -> u24
+u22 -> u24
+u22 -> u23
+u22 -> u23
+
+Luzula_sylvatica
+ID	Size	Incoming	Outgoing
+u50	1881	u46,u49,u49	u51
+Possible paths:
+u46 -> u50 -> u51
+u49 -> u50 -> u51
+u49 -> u50 -> u51
+
+ID	Size	Incoming	Outgoing
+u52	1537	u51	u55,u53,u54
+Possible paths:
+u51 -> u52 -> u55
+u51 -> u52 -> u53
+u51 -> u52 -> u54
+
+ID	Size	Incoming	Outgoing
+u57	2012	u47,u54,u56,u56	
+Possible paths:
+u47 -> u57
+u54 -> u57
+u56 -> u57
+u56 -> u57
+
+Lycopus_europaeus
+ID	Size	Incoming	Outgoing
+u88	1453	u41,u42,u43,u43	
+Possible paths:
+u41 -> u88
+u42 -> u88
+u43 -> u88
+u43 -> u88
+
+Malus_domestica
+Malus_sylvestris
+Malus_x_robusta
+Malva_neglecta
+ID	Size	Incoming	Outgoing
+u54	5517	u52,u53	u55,u56
+Possible paths:
+u52 -> u54 -> u55
+u52 -> u54 -> u56
+u53 -> u54 -> u55
+u53 -> u54 -> u56
+
+ID	Size	Incoming	Outgoing
+u58	5359	u52,u55,u57	u59
+Possible paths:
+u52 -> u58 -> u59
+u55 -> u58 -> u59
+u57 -> u58 -> u59
+
+ID	Size	Incoming	Outgoing
+u60	4428	u56,u57,u59	u61
+Possible paths:
+u56 -> u60 -> u61
+u57 -> u60 -> u61
+u59 -> u60 -> u61
+
+ID	Size	Incoming	Outgoing
+u62	2521	u53,u61	u63,u63
+Possible paths:
+u53 -> u62 -> u63
+u53 -> u62 -> u63
+u61 -> u62 -> u63
+u61 -> u62 -> u63
+
+Matricaria_chamomilla
+Matricaria_discoidea
+Matthiola_sinuata
+ID	Size	Incoming	Outgoing
+u32	1865	u30,u31,u31	u33
+Possible paths:
+u30 -> u32 -> u33
+u31 -> u32 -> u33
+u31 -> u32 -> u33
+
+Medicago_arabica
+ID	Size	Incoming	Outgoing
+u155	1396	u51,u54,u55,u56	
+Possible paths:
+u51 -> u155
+u54 -> u155
+u55 -> u155
+u56 -> u155
+
+Medicago_lupulina
+Melampyrum_sylvaticum
+Melittis_melissophyllum
+ID	Size	Incoming	Outgoing
+u57	6199		u59,u59,u58,u58
+Possible paths:
+u57 -> u59
+u57 -> u59
+u57 -> u58
+u57 -> u58
+
+Mercurialis_annua
+Misopates_orontium
+Moehringia_trinervia
+ID	Size	Incoming	Outgoing
+u19	3033	u17,u18	u20,u20
+Possible paths:
+u17 -> u19 -> u20
+u17 -> u19 -> u20
+u18 -> u19 -> u20
+u18 -> u19 -> u20
+
+ID	Size	Incoming	Outgoing
+u21	1818	u17,u18	u22,u22
+Possible paths:
+u17 -> u21 -> u22
+u17 -> u21 -> u22
+u18 -> u21 -> u22
+u18 -> u21 -> u22
+
+Myrica_gale
+Myriophyllum_alterniflorum
+Narthecium_ossifragum
+ID	Size	Incoming	Outgoing
+u22	3179	u20,u20,u21,u21	
+Possible paths:
+u20 -> u22
+u20 -> u22
+u21 -> u22
+u21 -> u22
+
+Nasturtium_officinale
+ID	Size	Incoming	Outgoing
+u59	4345		u60,u61,u60,u61
+Possible paths:
+u59 -> u60
+u59 -> u61
+u59 -> u60
+u59 -> u61
+
+Neckera_pumila
+Ononis_reclinata
+Orthothecium_rufescens
+Oxyria_digyna
+ID	Size	Incoming	Outgoing
+u358	6961	u10,u10	u359,u359
+Possible paths:
+u10 -> u358 -> u359
+u10 -> u358 -> u359
+u10 -> u358 -> u359
+u10 -> u358 -> u359
+
+ID	Size	Incoming	Outgoing
+u486	5625		u487,u488,u487,u488
+Possible paths:
+u486 -> u487
+u486 -> u488
+u486 -> u487
+u486 -> u488
+
+Parietaria_judaica
+Pentaglottis_sempervirens
+ID	Size	Incoming	Outgoing
+u302	3386	u300,u300,u301	u303
+Possible paths:
+u300 -> u302 -> u303
+u300 -> u302 -> u303
+u301 -> u302 -> u303
+
+Persicaria_maculosa
+ID	Size	Incoming	Outgoing
+u36	3064	u0	u38,u39,u37
+Possible paths:
+u0 -> u36 -> u38
+u0 -> u36 -> u39
+u0 -> u36 -> u37
+
+ID	Size	Incoming	Outgoing
+u43	8898	u39,u40,u42	u44
+Possible paths:
+u39 -> u43 -> u44
+u40 -> u43 -> u44
+u42 -> u43 -> u44
+
+ID	Size	Incoming	Outgoing
+u45	6403	u0,u37,u42	u46
+Possible paths:
+u0 -> u45 -> u46
+u37 -> u45 -> u46
+u42 -> u45 -> u46
+
+Petasites_albus
+ID	Size	Incoming	Outgoing
+u26	3700	u23,u24,u25,u25	
+Possible paths:
+u23 -> u26
+u24 -> u26
+u25 -> u26
+u25 -> u26
+
+Petasites_hybridus
+Phragmites_australis
+ID	Size	Incoming	Outgoing
+u1	5640		u4,u5,u2,u3
+Possible paths:
+u1 -> u4
+u1 -> u5
+u1 -> u2
+u1 -> u3
+
+ID	Size	Incoming	Outgoing
+u10	7918	u7,u8	u11,u11
+Possible paths:
+u7 -> u10 -> u11
+u7 -> u10 -> u11
+u8 -> u10 -> u11
+u8 -> u10 -> u11
+
+ID	Size	Incoming	Outgoing
+u30	1403	u5,u6,u7,u8	
+Possible paths:
+u5 -> u30
+u6 -> u30
+u7 -> u30
+u8 -> u30
+
+Plagiothecium_denticulatum
+Poa_chaixii
+ID	Size	Incoming	Outgoing
+u35	9962		u38,u39,u36,u37
+Possible paths:
+u35 -> u38
+u35 -> u39
+u35 -> u36
+u35 -> u37
+
+ID	Size	Incoming	Outgoing
+u44	3260	u39,u42	u45,u46
+Possible paths:
+u39 -> u44 -> u45
+u39 -> u44 -> u46
+u42 -> u44 -> u45
+u42 -> u44 -> u46
+
+Polygonum_aviculare
+Polygonum_maritimum
+ID	Size	Incoming	Outgoing
+u5013	4007	u5012	u5014,u5015,u5014
+Possible paths:
+u5012 -> u5013 -> u5014
+u5012 -> u5013 -> u5015
+u5012 -> u5013 -> u5014
+
+Polypogon_viridis
+ID	Size	Incoming	Outgoing
+u19	7393	u15,u16,u18	u20
+Possible paths:
+u15 -> u19 -> u20
+u16 -> u19 -> u20
+u18 -> u19 -> u20
+
+Polytrichastrum_sexangulare
+Polytrichum_commune
+Polytrichum_formosum
+Populus_nigra
+Populus_tremula
+Potamogeton_natans
+ID	Size	Incoming	Outgoing
+u90	7063		u91,u92,u91,u92
+Possible paths:
+u90 -> u91
+u90 -> u92
+u90 -> u91
+u90 -> u92
+
+Potentilla_anserina
+ID	Size	Incoming	Outgoing
+u49	3942		u50,u51,u50,u51
+Possible paths:
+u49 -> u50
+u49 -> u51
+u49 -> u50
+u49 -> u51
+
+Potentilla_indica
+ID	Size	Incoming	Outgoing
+u15	3538		u16,u17,u16,u17
+Possible paths:
+u15 -> u16
+u15 -> u17
+u15 -> u16
+u15 -> u17
+
+Potentilla_sterilis
+ID	Size	Incoming	Outgoing
+u25	2839	u22,u23	u27,u26
+Possible paths:
+u22 -> u25 -> u27
+u22 -> u25 -> u26
+u23 -> u25 -> u27
+u23 -> u25 -> u26
+
+Primula_veris
+Primula_vulgaris
+ID	Size	Incoming	Outgoing
+u38	2240	u1,u37	u39,u40
+Possible paths:
+u1 -> u38 -> u39
+u1 -> u38 -> u40
+u37 -> u38 -> u39
+u37 -> u38 -> u40
+
+ID	Size	Incoming	Outgoing
+u76	1373	u1,u37,u39,u40	
+Possible paths:
+u1 -> u76
+u37 -> u76
+u39 -> u76
+u40 -> u76
+
+Prunella_vulgaris
+Prunus_padus
+ID	Size	Incoming	Outgoing
+u62	3755	u60,u60,u61,u61	
+Possible paths:
+u60 -> u62
+u60 -> u62
+u61 -> u62
+u61 -> u62
+
+Pseudognaphalium_luteoalbum
+ID	Size	Incoming	Outgoing
+u38	9692	u3,u3	u39,u39
+Possible paths:
+u3 -> u38 -> u39
+u3 -> u38 -> u39
+u3 -> u38 -> u39
+u3 -> u38 -> u39
+
+Pseudoscleropodium_purum
+Pseudotaxiphyllum_elegans
+Pulicaria_dysenterica
+ID	Size	Incoming	Outgoing
+u21	3772	u19,u20	u22,u24
+Possible paths:
+u19 -> u21 -> u22
+u19 -> u21 -> u24
+u20 -> u21 -> u22
+u20 -> u21 -> u24
+
+Pyrus_communis
+Quercus_cerris
+Quercus_ilex
+Quercus_petraea
+ID	Size	Incoming	Outgoing
+u23	3247	u21,u22	u24,u26
+Possible paths:
+u21 -> u23 -> u24
+u21 -> u23 -> u26
+u22 -> u23 -> u24
+u22 -> u23 -> u26
+
+ID	Size	Incoming	Outgoing
+u25	3731	u22,u24	u27,u26
+Possible paths:
+u22 -> u25 -> u27
+u22 -> u25 -> u26
+u24 -> u25 -> u27
+u24 -> u25 -> u26
+
+Quercus_robur
+ID	Size	Incoming	Outgoing
+u50	3247	u48,u49	u51,u52
+Possible paths:
+u48 -> u50 -> u51
+u48 -> u50 -> u52
+u49 -> u50 -> u51
+u49 -> u50 -> u52
+
+ID	Size	Incoming	Outgoing
+u53	3731	u51,u52	u54,u55
+Possible paths:
+u51 -> u53 -> u54
+u51 -> u53 -> u55
+u52 -> u53 -> u54
+u52 -> u53 -> u55
+
+ID	Size	Incoming	Outgoing
+u56	8775	u48,u49,u54,u55	
+Possible paths:
+u48 -> u56
+u49 -> u56
+u54 -> u56
+u55 -> u56
+
+Ranunculus_sardous
+ID	Size	Incoming	Outgoing
+u23	9906	u21,u22	u24,u25
+Possible paths:
+u21 -> u23 -> u24
+u21 -> u23 -> u25
+u22 -> u23 -> u24
+u22 -> u23 -> u25
+
+Ranunculus_sceleratus
+ID	Size	Incoming	Outgoing
+u12	9083	u7,u9,u10	u13,u14
+Possible paths:
+u7 -> u12 -> u13
+u7 -> u12 -> u14
+u9 -> u12 -> u13
+u9 -> u12 -> u14
+u10 -> u12 -> u13
+u10 -> u12 -> u14
+
+Rhinanthus_minor
+Rhynchostegiella_tenella
+Rhynchostegium_megapolitanum
+Rhytidiadelphus_loreus
+Ribes_rubrum
+ID	Size	Incoming	Outgoing
+u337	5649	u333,u336	u338,u339
+Possible paths:
+u333 -> u337 -> u338
+u333 -> u337 -> u339
+u336 -> u337 -> u338
+u336 -> u337 -> u339
+
+ID	Size	Incoming	Outgoing
+u340	7319	u334,u339	u341,u341
+Possible paths:
+u334 -> u340 -> u341
+u334 -> u340 -> u341
+u339 -> u340 -> u341
+u339 -> u340 -> u341
+
+ID	Size	Incoming	Outgoing
+u1222	1388	u15,u15,u335,u338	
+Possible paths:
+u15 -> u1222
+u15 -> u1222
+u335 -> u1222
+u338 -> u1222
+
+Ribes_uva_crispa
+Rosa_agrestis
+Rosa_canina
+Rosa_rugosa
+Rosa_spinosissima
+ID	Size	Incoming	Outgoing
+u90	3599		u92,u92,u91,u91
+Possible paths:
+u90 -> u92
+u90 -> u92
+u90 -> u91
+u90 -> u91
+
+Rubus_caesius
+ID	Size	Incoming	Outgoing
+u58	9259	u55,u56,u57,u57	
+Possible paths:
+u55 -> u58
+u56 -> u58
+u57 -> u58
+u57 -> u58
+
+Rubus_idaeus
+ID	Size	Incoming	Outgoing
+u54	1614	u52,u52,u53,u53	
+Possible paths:
+u52 -> u54
+u52 -> u54
+u53 -> u54
+u53 -> u54
+
+Salicornia_ramosissima
+ID	Size	Incoming	Outgoing
+u593	9481	u589,u592	u594,u595
+Possible paths:
+u589 -> u593 -> u594
+u589 -> u593 -> u595
+u592 -> u593 -> u594
+u592 -> u593 -> u595
+
+ID	Size	Incoming	Outgoing
+u597	8479	u594,u596	u598,u599
+Possible paths:
+u594 -> u597 -> u598
+u594 -> u597 -> u599
+u596 -> u597 -> u598
+u596 -> u597 -> u599
+
+Salix_caprea
+Salix_cinerea
+Salix_repens
+ID	Size	Incoming	Outgoing
+u38	5570		u40,u40,u39,u39
+Possible paths:
+u38 -> u40
+u38 -> u40
+u38 -> u39
+u38 -> u39
+
+Salix_viminalis
+Sambucus_nigra.k1001.s31.c40
+ID	Size	Incoming	Outgoing
+u25	6855	u24	u27,u27,u26
+Possible paths:
+u24 -> u25 -> u27
+u24 -> u25 -> u27
+u24 -> u25 -> u26
+
+Sambucus_nigra
+Samolus_valerandi
+ID	Size	Incoming	Outgoing
+u150	1396	u42,u42,u43,u43	
+Possible paths:
+u42 -> u150
+u42 -> u150
+u43 -> u150
+u43 -> u150
+
+Saxifraga_aizoides
+Schoenoplectus_lacustris.k1001.s31.c40
+ID	Size	Incoming	Outgoing
+u63	3856		u66,u67,u64,u65
+Possible paths:
+u63 -> u66
+u63 -> u67
+u63 -> u64
+u63 -> u65
+
+ID	Size	Incoming	Outgoing
+u71	9031	u68,u69,u70	u72
+Possible paths:
+u68 -> u71 -> u72
+u69 -> u71 -> u72
+u70 -> u71 -> u72
+
+ID	Size	Incoming	Outgoing
+u179	1355	u67,u73,u74,u75	
+Possible paths:
+u67 -> u179
+u73 -> u179
+u74 -> u179
+u75 -> u179
+
+Schoenoplectus_lacustris
+ID	Size	Incoming	Outgoing
+u29	3856	u24	u32,u30,u31
+Possible paths:
+u24 -> u29 -> u32
+u24 -> u29 -> u30
+u24 -> u29 -> u31
+
+ID	Size	Incoming	Outgoing
+u36	9031	u34,u35	u37,u38
+Possible paths:
+u34 -> u36 -> u37
+u34 -> u36 -> u38
+u35 -> u36 -> u37
+u35 -> u36 -> u38
+
+ID	Size	Incoming	Outgoing
+u85	1355	u21,u22,u23,u24	
+Possible paths:
+u21 -> u85
+u22 -> u85
+u23 -> u85
+u24 -> u85
+
+Schoenoplectus_triqueter
+ID	Size	Incoming	Outgoing
+u44	7079	u42,u43	u45,u46
+Possible paths:
+u42 -> u44 -> u45
+u42 -> u44 -> u46
+u43 -> u44 -> u45
+u43 -> u44 -> u46
+
+ID	Size	Incoming	Outgoing
+u62	9900	u52,u56,u57,u61	
+Possible paths:
+u52 -> u62
+u56 -> u62
+u57 -> u62
+u61 -> u62
+
+Scirpus_sylvaticus
+ID	Size	Incoming	Outgoing
+u28	7807	u23,u26	u29,u29
+Possible paths:
+u23 -> u28 -> u29
+u23 -> u28 -> u29
+u26 -> u28 -> u29
+u26 -> u28 -> u29
+
+Scutellaria_galericulata
+Scutellaria_minor
+ID	Size	Incoming	Outgoing
+u32	4910	u28,u29,u30,u31	
+Possible paths:
+u28 -> u32
+u29 -> u32
+u30 -> u32
+u31 -> u32
+
+ID	Size	Incoming	Outgoing
+u138	1414	u28,u29,u30,u31	
+Possible paths:
+u28 -> u138
+u29 -> u138
+u30 -> u138
+u31 -> u138
+
+Senecio_sylvaticus
+ID	Size	Incoming	Outgoing
+u8	6564		u9,u10,u9,u10
+Possible paths:
+u8 -> u9
+u8 -> u10
+u8 -> u9
+u8 -> u10
+
+Sherardia_arvensis
+Solanum_dulcamara
+ID	Size	Incoming	Outgoing
+u31	5631	u29,u30	u32,u32
+Possible paths:
+u29 -> u31 -> u32
+u29 -> u31 -> u32
+u30 -> u31 -> u32
+u30 -> u31 -> u32
+
+ID	Size	Incoming	Outgoing
+u35	4112	u30,u34	u36,u36
+Possible paths:
+u30 -> u35 -> u36
+u30 -> u35 -> u36
+u34 -> u35 -> u36
+u34 -> u35 -> u36
+
+ID	Size	Incoming	Outgoing
+u62	1431	u29,u33,u33,u34	
+Possible paths:
+u29 -> u62
+u33 -> u62
+u33 -> u62
+u34 -> u62
+
+Sparganium_emersum
+Spergula_arvensis
+ID	Size	Incoming	Outgoing
+u26	3848	u25	u28,u29,u27
+Possible paths:
+u25 -> u26 -> u28
+u25 -> u26 -> u29
+u25 -> u26 -> u27
+
+Spergularia_bocconei
+ID	Size	Incoming	Outgoing
+u9	3815	u4,u7,u8	u10
+Possible paths:
+u4 -> u9 -> u10
+u7 -> u9 -> u10
+u8 -> u9 -> u10
+
+Spergularia_marina
+ID	Size	Incoming	Outgoing
+u13	3815	u10,u12	u14,u15
+Possible paths:
+u10 -> u13 -> u14
+u10 -> u13 -> u15
+u12 -> u13 -> u14
+u12 -> u13 -> u15
+
+Sphagnum_contortum
+Sphagnum_girgensohnii
+Sphagnum_tenellum
+Straminergon_stramineum
+Succisa_pratensis
+Syringa_vulgaris
+Tamarix_gallica
+ID	Size	Incoming	Outgoing
+u21	5332	u14,u15,u19,u20	
+Possible paths:
+u14 -> u21
+u15 -> u21
+u19 -> u21
+u20 -> u21
+
+Tanacetum_parthenium
+Tanacetum_vulgare
+Thalictrum_minus
+ID	Size	Incoming	Outgoing
+u26	6390		u27,u28,u27,u28
+Possible paths:
+u26 -> u27
+u26 -> u28
+u26 -> u27
+u26 -> u28
+
+Thuidium_tamariscinum
+Torilis_japonica
+Tragopogon_pratensis
+ID	Size	Incoming	Outgoing
+u86	2068	u81,u84,u85	u88,u89,u87
+Possible paths:
+u81 -> u86 -> u88
+u81 -> u86 -> u89
+u81 -> u86 -> u87
+u84 -> u86 -> u88
+u84 -> u86 -> u89
+u84 -> u86 -> u87
+u85 -> u86 -> u88
+u85 -> u86 -> u89
+u85 -> u86 -> u87
+
+ID	Size	Incoming	Outgoing
+u90	7782	u82,u87,u88,u89	
+Possible paths:
+u82 -> u90
+u87 -> u90
+u88 -> u90
+u89 -> u90
+
+Trichophorum_cespitosum
+ID	Size	Incoming	Outgoing
+u11	7632	u5,u8,u10	u12
+Possible paths:
+u5 -> u11 -> u12
+u8 -> u11 -> u12
+u10 -> u11 -> u12
+
+ID	Size	Incoming	Outgoing
+u14	7830	u3,u12,u13,u13	
+Possible paths:
+u3 -> u14
+u12 -> u14
+u13 -> u14
+u13 -> u14
+
+Trifolium_dubium
+Trifolium_fragiferum
+ID	Size	Incoming	Outgoing
+u42	3976		u43,u44,u43,u44
+Possible paths:
+u42 -> u43
+u42 -> u44
+u42 -> u43
+u42 -> u44
+
+Trifolium_occidentale
+Trifolium_striatum
+ID	Size	Incoming	Outgoing
+u43	1598	u40,u41,u42	u44
+Possible paths:
+u40 -> u43 -> u44
+u41 -> u43 -> u44
+u42 -> u43 -> u44
+
+Trifolium_subterraneum
+ID	Size	Incoming	Outgoing
+u194	2651	u192,u193	u195,u196
+Possible paths:
+u192 -> u194 -> u195
+u192 -> u194 -> u196
+u193 -> u194 -> u195
+u193 -> u194 -> u196
+
+ID	Size	Incoming	Outgoing
+u197	4082	u192,u193,u195,u196	
+Possible paths:
+u192 -> u197
+u193 -> u197
+u195 -> u197
+u196 -> u197
+
+Triglochin_maritima
+Triglochin_palustris
+Tripolium_pannonicum
+Tussilago_farfara
+ID	Size	Incoming	Outgoing
+u81	3781	u79,u80,u80	u82
+Possible paths:
+u79 -> u81 -> u82
+u80 -> u81 -> u82
+u80 -> u81 -> u82
+
+Ulmus_glabra
+Ulmus_minor
+Ulota_crispa
+Umbilicus_rupestris
+Urtica_dioica
+Urtica_urens
+ID	Size	Incoming	Outgoing
+u85	2248	u83,u83,u84,u84	
+Possible paths:
+u83 -> u85
+u83 -> u85
+u84 -> u85
+u84 -> u85
+
+Vaccinium_vitis_idaea
+Verbascum_nigrum
+ID	Size	Incoming	Outgoing
+u12	6863		u14,u14,u13,u13
+Possible paths:
+u12 -> u14
+u12 -> u14
+u12 -> u13
+u12 -> u13
+
+Verbascum_thapsus
+ID	Size	Incoming	Outgoing
+u32	6858	u1,u1,u31,u31	
+Possible paths:
+u1 -> u32
+u1 -> u32
+u31 -> u32
+u31 -> u32
+
+Verbena_officinalis
+ID	Size	Incoming	Outgoing
+u7	7437	u5,u6	u8,u9
+Possible paths:
+u5 -> u7 -> u8
+u5 -> u7 -> u9
+u6 -> u7 -> u8
+u6 -> u7 -> u9
+
+ID	Size	Incoming	Outgoing
+u10	2212	u5,u6,u8,u9	
+Possible paths:
+u5 -> u10
+u6 -> u10
+u8 -> u10
+u9 -> u10
+
+Veronica_anagallis_aquatica
+Veronica_arvensis
+ID	Size	Incoming	Outgoing
+u12	3615		u13,u14,u13,u14
+Possible paths:
+u12 -> u13
+u12 -> u14
+u12 -> u13
+u12 -> u14
+
+Veronica_scutellata
+Veronica_serpyllifolia
+Veronica_triphyllos
+ID	Size	Incoming	Outgoing
+u20	6916		u21,u23,u21,u22
+Possible paths:
+u20 -> u21
+u20 -> u23
+u20 -> u21
+u20 -> u22
+
+Veronica_verna
+ID	Size	Incoming	Outgoing
+u49	6855		u50,u51,u50,u51
+Possible paths:
+u49 -> u50
+u49 -> u51
+u49 -> u50
+u49 -> u51
+
+Vicia_sativa
+ID	Size	Incoming	Outgoing
+u9	4108		u10,u11,u10,u11
+Possible paths:
+u9 -> u10
+u9 -> u11
+u9 -> u10
+u9 -> u11
+
+Viola_odorata
+Viscum_album

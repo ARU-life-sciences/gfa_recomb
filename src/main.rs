@@ -164,6 +164,7 @@ fn main() -> Result<()> {
     }
 
     // Output repeat candidates
+    println!("ID\tSize\tIncoming\tOutgoing\tPaths");
     for node in repeat_candidates {
         let node_name = std::str::from_utf8(&node)?;
         let segment_size = segment_sizes.get(&node).unwrap();
@@ -182,15 +183,6 @@ fn main() -> Result<()> {
             .collect::<Vec<_>>()
             .join(",");
 
-        println!("ID\tSize\tIncoming\tOutgoing");
-        println!(
-            "{}\t{}\t{}\t{}",
-            node_name, segment_size, connected_incoming_str, connected_outgoing_str
-        );
-
-        // === ADDED BANDAGE-STYLE PATH ENUMERATOR ===
-        println!("Possible paths:");
-
         let preds: Vec<_> = connected_incoming
             .iter()
             .map(|l| std::str::from_utf8(&l.from_segment).unwrap())
@@ -201,26 +193,32 @@ fn main() -> Result<()> {
             .map(|l| std::str::from_utf8(&l.to_segment).unwrap())
             .collect();
 
+        let mut paths = Vec::new();
+
         if !preds.is_empty() && !succs.is_empty() {
             for pred in &preds {
                 for succ in &succs {
-                    println!("{} -> {} -> {}", pred, node_name, succ);
+                    paths.push(format!("{}>{}>{}", pred, node_name, succ));
                 }
             }
         } else if !preds.is_empty() {
             for pred in &preds {
-                println!("{} -> {}", pred, node_name);
+                paths.push(format!("{}>{}", pred, node_name));
             }
         } else if !succs.is_empty() {
             for succ in &succs {
-                println!("{} -> {}", node_name, succ);
+                paths.push(format!("{}>{}", node_name, succ));
             }
         } else {
-            println!("{} has no connected paths.", node_name);
+            eprintln!("{} has no connected paths.", node_name);
         }
 
-        println!();
-        // === END BANDAGE-STYLE PATH ENUMERATOR ===
+        let paths_string = paths.join(",");
+
+        println!(
+            "{}\t{}\t{}\t{}\t{}",
+            node_name, segment_size, connected_incoming_str, connected_outgoing_str, paths_string
+        );
     }
     Ok(())
 }
