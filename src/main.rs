@@ -76,11 +76,6 @@ fn main() -> Result<()> {
 
         // 1. Check size ≤ 10 kb
         if size > REPEAT_NODE_SIZE_LIMIT {
-            // eprintln!(
-            //     "Skipping Segment ID: {}, size: {} (too large)",
-            //     std::str::from_utf8(&id)?,
-            //     size
-            // );
             continue;
         }
 
@@ -107,13 +102,6 @@ fn main() -> Result<()> {
             .unwrap_or(0);
 
         if in_count + out_count < IN_OUT_THRESHOLD * 2 {
-            // eprintln!(
-            //     "Skipping Segment ID: {}, size: {} (in: {}, out: {})",
-            //     std::str::from_utf8(&id)?,
-            //     size,
-            //     in_count,
-            //     out_count
-            // );
             continue;
         }
 
@@ -141,12 +129,6 @@ fn main() -> Result<()> {
             .unwrap_or_default();
 
         for neighbor_id in connected_incoming.iter().chain(connected_outgoing.iter()) {
-            // let neighbor_size = segment_sizes.get(neighbor_id);
-            // eprintln!(
-            //     "  Neighbor ID: {}, size: {}",
-            //     std::str::from_utf8(neighbor_id)?,
-            //     neighbor_size.unwrap_or(&0)
-            // );
             if let Some(&neighbor_size) = segment_sizes.get(neighbor_id) {
                 if neighbor_size < NEIGHBORING_NODE_MINIMUM {
                     valid_neighbors = false;
