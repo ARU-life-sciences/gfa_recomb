@@ -149,18 +149,26 @@ fn main() -> Result<()> {
         let segment_size = segment_sizes.get(&node).unwrap();
 
         let connected_incoming = incoming.get(&node).cloned().unwrap_or(Vec::new());
-        let connected_incoming_str = connected_incoming
+        let mut connected_incoming_str = connected_incoming
             .iter()
             .map(|l| std::str::from_utf8(&l.from_segment).unwrap())
             .collect::<Vec<_>>()
             .join(",");
 
+        if connected_incoming_str.is_empty() {
+            connected_incoming_str = "None".into();
+        }
+
         let connected_outgoing = outgoing.get(&node).cloned().unwrap_or(Vec::new());
-        let connected_outgoing_str = connected_outgoing
+        let mut connected_outgoing_str = connected_outgoing
             .iter()
             .map(|l| std::str::from_utf8(&l.to_segment).unwrap())
             .collect::<Vec<_>>()
             .join(",");
+
+        if connected_outgoing_str.is_empty() {
+            connected_outgoing_str = "None".into();
+        }
 
         let preds: Vec<_> = connected_incoming
             .iter()
