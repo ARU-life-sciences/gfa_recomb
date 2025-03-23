@@ -8,7 +8,7 @@ const REPEAT_NODE_SIZE_LIMIT: usize = 10_000;
 const NEIGHBORING_NODE_MINIMUM: usize = 5_000;
 const IN_OUT_THRESHOLD: usize = 2;
 
-const VERSION: &str = "0.1.0";
+const VERSION: &str = "0.1.1";
 
 /// Given a path, load the GFA into a `GFA` struct.
 pub fn load_gfa<T, P>(path: P) -> Result<GFA<Vec<u8>, T>>
@@ -17,15 +17,12 @@ where
     P: AsRef<std::path::Path>,
 {
     let parser = GFAParser::new();
-    let gfa = parser
-        .parse_file(path.as_ref())
-        .with_context(|| {
-            format!(
-                "Failed to parse GFA from path: {:?}",
-                path.as_ref().as_os_str()
-            )
-        })
-        .context("Failed to parse GFA file")?;
+    let gfa = parser.parse_file(path.as_ref()).with_context(|| {
+        format!(
+            "Failed to parse GFA from path: {:?}",
+            path.as_ref().as_os_str()
+        )
+    })?;
     Ok(gfa)
 }
 
@@ -79,8 +76,7 @@ fn main() -> Result<()> {
             continue;
         }
 
-        // 2. Check 2 incoming and 2 outgoing edges
-        // 2. Check 2 unique incoming and 2 unique outgoing edges
+        // 2. Check that the incoming and outgoing counts are >= 4 across both
         let in_count = incoming
             .get(&id)
             .map(|v| {
@@ -101,6 +97,7 @@ fn main() -> Result<()> {
             })
             .unwrap_or(0);
 
+        // multiply by two as there are two ends of each segment
         if in_count + out_count < IN_OUT_THRESHOLD * 2 {
             continue;
         }
@@ -145,7 +142,7 @@ fn main() -> Result<()> {
         }
     }
 
-    // Output repeat candidates
+    // 4. Output repeat candidates
     println!("ID\tSize\tIncoming\tOutgoing\tPaths");
     for node in repeat_candidates {
         let node_name = std::str::from_utf8(&node)?;
@@ -202,5 +199,6 @@ fn main() -> Result<()> {
             node_name, segment_size, connected_incoming_str, connected_outgoing_str, paths_string
         );
     }
+
     Ok(())
 }
