@@ -1,6 +1,8 @@
+//! Bidirected Path Enumerator with Flexible Orientation Traversal
+//! This program identifies potential repeat nodes in a GFA graph.
+
 use anyhow::{Context, Result};
-use gfa::gfa::{Link, GFA};
-use gfa::optfields::OptFields;
+use gfa::gfa::{Orientation, GFA};
 use gfa::parser::GFAParser;
 use std::collections::HashMap;
 
@@ -8,12 +10,11 @@ const REPEAT_NODE_SIZE_LIMIT: usize = 10_000;
 const NEIGHBORING_NODE_MINIMUM: usize = 5_000;
 const IN_OUT_THRESHOLD: usize = 2;
 
-const VERSION: &str = "0.1.1";
+const VERSION: &str = "0.5.0";
 
-/// Given a path, load the GFA into a `GFA` struct.
-pub fn load_gfa<T, P>(path: P) -> Result<GFA<Vec<u8>, T>>
+/// Load a GFA file from the provided path.
+pub fn load_gfa<P>(path: P) -> Result<GFA<Vec<u8>, ()>>
 where
-    T: OptFields,
     P: AsRef<std::path::Path>,
 {
     let parser = GFAParser::new();
@@ -27,112 +28,90 @@ where
 }
 
 fn main() -> Result<()> {
-    // check there is only 1 argument
-    if std::env::args().count() != 2 {
-        eprintln!("Detect bidirectionally bifurcated repeats in mitochondrial genomes.");
-        eprintln!("Paths through the focal node ignore orientation.");
+    let args: Vec<String> = std::env::args().collect();
+
+    if args.len() < 2 || args.len() > 3 {
+        eprintln!("Bidirected Repeat Path Enumerator");
         eprintln!("Version: {}", VERSION);
-        eprintln!("Usage: {} <GFA>", std::env::args().next().unwrap());
+        eprintln!("Usage: {} <GFA>", args[0]);
+        eprintln!(
+            "\nBy default, traversal allows entry and exit through the same orientation.\nUse --strict to enforce bidirected traversal (enter one end, exit the other).\n"
+        );
         std::process::exit(1);
     }
 
-    // Path to the GFA file
-    let gfa_file = std::env::args()
-        .nth(1)
-        .expect("Please provide the path to the GFA file as an argument");
+    let gfa_file = &args[1];
 
-    // Open and parse the GFA file
+    if gfa_file == "-h" || gfa_file == "--help" {
+        eprintln!("This program identifies potential repeat nodes in a GFA graph.");
+        std::process::exit(1);
+    }
+
     let gfa = load_gfa(gfa_file).context("Failed to load GFA file")?;
 
-    // Collect segment sizes into a HashMap
     let segment_sizes: HashMap<Vec<u8>, usize> = gfa
         .segments
         .iter()
         .map(|segment| (segment.name.clone(), segment.sequence.len()))
         .collect();
 
-    // Build adjacency lists
-    let mut incoming: HashMap<Vec<u8>, Vec<&Link<Vec<u8>, ()>>> = HashMap::new();
-    let mut outgoing: HashMap<Vec<u8>, Vec<&Link<Vec<u8>, ()>>> = HashMap::new();
+    let mut edge_map: HashMap<Vec<u8>, HashMap<Orientation, Vec<(Vec<u8>, Orientation)>>> =
+        HashMap::new();
 
     for link in &gfa.links {
         let from = link.from_segment.clone();
         let to = link.to_segment.clone();
+        let from_orient = link.from_orient;
+        let to_orient = link.to_orient;
 
-        // Handle orientation if necessary
-        outgoing.entry(from).or_default().push(link);
-        incoming.entry(to).or_default().push(link);
+        edge_map
+            .entry(from.clone())
+            .or_default()
+            .entry(from_orient)
+            .or_default()
+            .push((to.clone(), to_orient));
+
+        edge_map
+            .entry(to.clone())
+            .or_default()
+            .entry(to_orient)
+            .or_default()
+            .push((from.clone(), from_orient));
     }
 
-    // Now find repeat candidates based on the criteria
     let mut repeat_candidates = Vec::new();
 
     for segment in &gfa.segments {
         let id = segment.name.clone();
         let size = segment.sequence.len();
 
-        // 1. Check size ≤ 10 kb
         if size > REPEAT_NODE_SIZE_LIMIT {
             continue;
         }
 
-        // 2. Check that the incoming and outgoing counts are >= 4 across both
-        let in_count = incoming
+        let neighbor_count: usize = edge_map
             .get(&id)
-            .map(|v| {
-                v.iter()
-                    .map(|link| link.from_segment.clone())
-                    .collect::<Vec<_>>()
-                    .len()
-            })
+            .map(|orient_map| orient_map.values().map(|v| v.len()).sum())
             .unwrap_or(0);
 
-        let out_count = outgoing
-            .get(&id)
-            .map(|v| {
-                v.iter()
-                    .map(|link| link.to_segment.clone())
-                    .collect::<Vec<_>>()
-                    .len()
-            })
-            .unwrap_or(0);
-
-        // multiply by two as there are two ends of each segment
-        if in_count + out_count < IN_OUT_THRESHOLD * 2 {
+        if neighbor_count < IN_OUT_THRESHOLD * 2 {
             continue;
         }
 
-        // 3. Check all connected nodes are ≥ 10 kb
         let mut valid_neighbors = true;
-
-        let connected_incoming = incoming
-            .get(&id)
-            .map(|links| {
-                links
-                    .iter()
-                    .map(|l| l.from_segment.clone())
-                    .collect::<Vec<_>>()
-            })
-            .unwrap_or_default();
-
-        let connected_outgoing = outgoing
-            .get(&id)
-            .map(|links| {
-                links
-                    .iter()
-                    .map(|l| l.to_segment.clone())
-                    .collect::<Vec<_>>()
-            })
-            .unwrap_or_default();
-
-        for neighbor_id in connected_incoming.iter().chain(connected_outgoing.iter()) {
-            if let Some(&neighbor_size) = segment_sizes.get(neighbor_id) {
-                if neighbor_size < NEIGHBORING_NODE_MINIMUM {
+        for orient_neighbors in edge_map.get(&id).unwrap_or(&HashMap::new()).values() {
+            for (neighbor_id, _) in orient_neighbors {
+                if let Some(&neighbor_size) = segment_sizes.get(neighbor_id) {
+                    if neighbor_size < NEIGHBORING_NODE_MINIMUM {
+                        valid_neighbors = false;
+                        break;
+                    }
+                } else {
                     valid_neighbors = false;
                     break;
                 }
-            } else {
-                valid_neighbors = false;
+            }
+            if !valid_neighbors {
                 break;
             }
         }
@@ -142,70 +121,13 @@ fn main() -> Result<()> {
         }
     }
 
-    // 4. Output repeat candidates
-    println!("ID\tSize\tIncoming\tOutgoing\tPaths");
+    println!("ID\tSize");
+
     for node in repeat_candidates {
         let node_name = std::str::from_utf8(&node)?;
         let segment_size = segment_sizes.get(&node).unwrap();
 
-        let connected_incoming = incoming.get(&node).cloned().unwrap_or(Vec::new());
-        let mut connected_incoming_str = connected_incoming
-            .iter()
-            .map(|l| std::str::from_utf8(&l.from_segment).unwrap())
-            .collect::<Vec<_>>()
-            .join(",");
-
-        if connected_incoming_str.is_empty() {
-            connected_incoming_str = "None".into();
-        }
-
-        let connected_outgoing = outgoing.get(&node).cloned().unwrap_or(Vec::new());
-        let mut connected_outgoing_str = connected_outgoing
-            .iter()
-            .map(|l| std::str::from_utf8(&l.to_segment).unwrap())
-            .collect::<Vec<_>>()
-            .join(",");
-
-        if connected_outgoing_str.is_empty() {
-            connected_outgoing_str = "None".into();
-        }
-
-        let preds: Vec<_> = connected_incoming
-            .iter()
-            .map(|l| std::str::from_utf8(&l.from_segment).unwrap())
-            .collect();
-
-        let succs: Vec<_> = connected_outgoing
-            .iter()
-            .map(|l| std::str::from_utf8(&l.to_segment).unwrap())
-            .collect();
-
-        let mut paths = Vec::new();
-
-        if !preds.is_empty() && !succs.is_empty() {
-            for pred in &preds {
-                for succ in &succs {
-                    paths.push(format!("{}>{}>{}", pred, node_name, succ));
-                }
-            }
-        } else if !preds.is_empty() {
-            for pred in &preds {
-                paths.push(format!("{}>{}", pred, node_name));
-            }
-        } else if !succs.is_empty() {
-            for succ in &succs {
-                paths.push(format!("{}>{}", node_name, succ));
-            }
-        } else {
-            eprintln!("{} has no connected paths.", node_name);
-        }
-
-        let paths_string = paths.join(",");
-
-        println!(
-            "{}\t{}\t{}\t{}\t{}",
-            node_name, segment_size, connected_incoming_str, connected_outgoing_str, paths_string
-        );
+        println!("{}\t{}", node_name, segment_size);
     }
 
     Ok(())
