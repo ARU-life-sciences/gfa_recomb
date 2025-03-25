@@ -89,6 +89,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "bstr"
+version = "1.11.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "531a9155a481e2ee699d4f98f43c0ca4ff8ee1bfd55c31e9e98fb29d2b176fe0"
+dependencies = [
+ "memchr",
+ "regex-automata",
+ "serde",
+]
+
+[[package]]
 name = "bytemuck"
 version = "1.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -160,7 +171,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9632601a032d2ae43f5050b454dd27c2add69b2e52bd46a4888f3aeb6e3629f5"
 dependencies = [
  "anyhow",
- "bstr",
+ "bstr 0.2.17",
  "bytemuck",
  "fnv",
  "lazy_static",
@@ -171,9 +182,10 @@ dependencies = [
 
 [[package]]
 name = "gfa_recomb"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
+ "bstr 1.11.3",
  "clap",
  "gfa",
 ]
@@ -294,6 +306,26 @@ name = "ryu"
 version = "1.0.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "28d3b2b1366ec20994f1fd18c3c594f05c5dd4bc44d8bb0c1c632c8d6829481f"
+
+[[package]]
+name = "serde"
+version = "1.0.219"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5f0e2c6ed6606019b4e29e69dbaba95b11854410e5347d525002456dbbb786b6"
+dependencies = [
+ "serde_derive",
+]
+
+[[package]]
+name = "serde_derive"
+version = "1.0.219"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5b0276cf7f2c73365f7157c8123c21cd9a50fbbd844757af28ca1f5925fc2a00"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
 
 [[package]]
 name = "static_assertions"

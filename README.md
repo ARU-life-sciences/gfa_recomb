@@ -6,3 +6,10 @@ Using only information from incoming and outgoing nodes (ignoring orientation), 
 # Simple CLI
 gfa_recomb <GFA>
 ```
+## GraphAligner output
+
+Optionally take GraphAligner output (GAF format), which will:
+
+- 
+- look for paths of length 3 (e.g. >u2<u3<u7)
+ 
