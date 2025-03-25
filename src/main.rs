@@ -2,15 +2,33 @@
 //! This program identifies potential repeat nodes in a GFA graph.
 
 use anyhow::{Context, Result};
+use clap::{arg, command, value_parser, ArgMatches};
 use gfa::gfa::{Orientation, GFA};
 use gfa::parser::GFAParser;
 use std::collections::HashMap;
+use std::path::PathBuf;
 
-const REPEAT_NODE_SIZE_LIMIT: usize = 10_000;
-const NEIGHBORING_NODE_MINIMUM: usize = 5_000;
-const IN_OUT_THRESHOLD: usize = 2;
-
-const VERSION: &str = "0.5.0";
+fn cli() -> ArgMatches {
+    command!()
+        .about("A Bidirected Repeat Path Enumerator")
+        .arg(arg!(<GFA> "Input file in GFA format.").value_parser(value_parser!(PathBuf)))
+        .arg(
+            arg!(-r --repeat [REPEAT] "Repeat node size limit")
+                .value_parser(value_parser!(usize))
+                .default_value("10000"),
+        )
+        .arg(
+            arg!(-n --neighbor [NEIGHBOR] "Minimum neighboring node size")
+                .value_parser(value_parser!(usize))
+                .default_value("10000"),
+        )
+        .arg(
+            arg!(-i --inout [INOUT] "In/out degree threshold")
+                .value_parser(value_parser!(usize))
+                .default_value("2"),
+        )
+        .get_matches()
+}
 
 /// Load a GFA file from the provided path.
 pub fn load_gfa<P>(path: P) -> Result<GFA<Vec<u8>, ()>>
@@ -28,26 +46,13 @@ where
 }
 
 fn main() -> Result<()> {
-    let args: Vec<String> = std::env::args().collect();
-
-    if args.len() < 2 || args.len() > 3 {
-        eprintln!("Bidirected Repeat Path Enumerator");
-        eprintln!("Version: {}", VERSION);
-        eprintln!("Usage: {} <GFA>", args[0]);
-        eprintln!(
-            "\nBy default, traversal allows entry and exit through the same orientation.\nUse --strict to enforce bidirected traversal (enter one end, exit the other).\n"
-        );
-        std::process::exit(1);
-    }
-
-    let gfa_file = &args[1];
-
-    if gfa_file == "-h" || gfa_file == "--help" {
-        eprintln!("This program identifies potential repeat nodes in a GFA graph.");
-        std::process::exit(1);
-    }
-
+    let args = cli();
+    let gfa_file = args.get_one::<PathBuf>("GFA").expect("GFA required");
     let gfa = load_gfa(gfa_file).context("Failed to load GFA file")?;
+
+    let repeat_node_size_limit = *args.get_one::<usize>("repeat").unwrap();
+    let neighboring_node_minimum = *args.get_one::<usize>("neighbor").unwrap();
+    let in_out_threshold = *args.get_one::<usize>("inout").unwrap();
 
     let segment_sizes: HashMap<Vec<u8>, usize> = gfa
         .segments
@@ -85,7 +90,8 @@ fn main() -> Result<()> {
         let id = segment.name.clone();
         let size = segment.sequence.len();
 
-        if size > REPEAT_NODE_SIZE_LIMIT {
+        // if the segment is too large, skip it
+        if size > repeat_node_size_limit {
             continue;
         }
 
@@ -94,7 +100,7 @@ fn main() -> Result<()> {
             .map(|orient_map| orient_map.values().map(|v| v.len()).sum())
             .unwrap_or(0);
 
-        if neighbor_count < IN_OUT_THRESHOLD * 2 {
+        if neighbor_count < in_out_threshold * 2 {
             continue;
         }
 
@@ -102,7 +108,7 @@ fn main() -> Result<()> {
         for orient_neighbors in edge_map.get(&id).unwrap_or(&HashMap::new()).values() {
             for (neighbor_id, _) in orient_neighbors {
                 if let Some(&neighbor_size) = segment_sizes.get(neighbor_id) {
-                    if neighbor_size < NEIGHBORING_NODE_MINIMUM {
+                    if neighbor_size < neighboring_node_minimum {
                         valid_neighbors = false;
                         break;
                     }
@@ -121,7 +127,9 @@ fn main() -> Result<()> {
         }
     }
 
-    println!("ID\tSize");
+    if !repeat_candidates.is_empty() {
+        println!("ID\tSize");
+    }
 
     for node in repeat_candidates {
         let node_name = std::str::from_utf8(&node)?;
