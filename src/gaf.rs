@@ -1,18 +1,12 @@
-use anyhow::{Error, Result};
+use anyhow::Result;
 use bstr::{io::*, ByteSlice};
 use gfa::{
     gafpaf::{parse_gaf, GAFPath, GAFStep},
     gfa::Orientation,
     optfields::OptField,
 };
-use std::{
-    borrow::BorrowMut,
-    collections::{HashMap, HashSet},
-    fmt::Display,
-    fs::File,
-    io::BufReader,
-    path::PathBuf,
-};
+use std::io::{self, Write};
+use std::{collections::HashMap, fmt::Display, fs::File, io::BufReader, path::PathBuf};
 
 // Example paths from one segment
 // define 'repeat' as always on +ve segment
@@ -73,38 +67,175 @@ pub fn count_gaf_paths(gaf_path: PathBuf, nodes: Vec<String>) -> Result<()> {
 
     let paths = Paths::from_vec(paths).split_into_repeats();
 
-    for paths in paths.clone() {
-        for ((s, p), c) in paths.paths {
-            println!("{p}:{c}");
-        }
-    }
-
     output_repeat_lines(paths);
 
     Ok(())
+}
+
+/// Compute the Recombination Complexity Index (RCI) from a list of recombination path pairs.
+///
+/// Each tuple in `revcomps` represents a pair of paths that are reverse complements,
+/// along with their coverage values. The RCI summarizes both:
+///
+/// 1. **Coverage balance** between the forward and reverse paths
+/// 2. **Path diversity** through repeat nodes (more paths = higher isomeric potential)
+///
+/// The RCI is computed as:
+///
+/// ```text
+///     RCI = (1 / R) * Σ [S_r * log2(P_r)]
+/// ```
+///
+/// Where:
+/// - `R` is the number of repeat nodes (focal segments)
+/// - `P_r` is the number of distinct paths through repeat node `r`
+/// - `S_r` is the average recombination score for repeat `r`, where:
+///   `recomb_score = 2 * min(rel_cov1, rel_cov2)`
+///
+/// # Arguments
+/// * `revcomps` - A vector of tuples (path1, cov1, path2, cov2)
+///
+/// # Returns
+/// * `f64` - The recombination complexity index (RCI)
+///
+fn compute_rci(revcomps: &Vec<(String, i32, String, i32)>) -> f64 {
+    use std::f64::consts::LN_2;
+
+    // Map of repeat node ID to its recombination scores and path count
+    let mut repeat_groups: HashMap<String, (Vec<f64>, usize)> = HashMap::new();
+
+    for (p1, cov1, p2, cov2) in revcomps {
+        let total_cov = *cov1 as f64 + *cov2 as f64;
+        if total_cov == 0.0 {
+            continue; // skip zero-coverage cases
+        }
+
+        let rel1 = *cov1 as f64 / total_cov;
+        let recomb_score = 2.0 * rel1.min(1.0 - rel1);
+
+        // Parse the repeat node from the middle segment of either path
+        if let (Some(repeat_id), path_count) = extract_repeat_info(p1, p2) {
+            repeat_groups
+                .entry(repeat_id)
+                .and_modify(|(scores, count)| {
+                    scores.push(recomb_score);
+                    *count += path_count;
+                })
+                .or_insert((vec![recomb_score], path_count));
+        }
+    }
+
+    // Compute average S_r * log2(P_r) for each repeat
+    let mut total_score = 0.0;
+    let mut n_repeats = 0;
+
+    for (_repeat_id, (scores, path_count)) in repeat_groups {
+        if scores.is_empty() || path_count <= 1 {
+            continue;
+        }
+
+        let s_r: f64 = scores.iter().sum::<f64>() / scores.len() as f64;
+        let p_r: f64 = path_count as f64;
+
+        let score = s_r * (p_r.ln() / LN_2); // log2
+        total_score += score;
+        n_repeats += 1;
+    }
+
+    if n_repeats > 0 {
+        total_score / n_repeats as f64
+    } else {
+        0.0
+    }
+}
+
+/// Extract the focal repeat segment and number of distinct paths from two path strings.
+///
+/// Assumes paths are of the form `<seg1>seg2<seg3` or similar.
+///
+/// Returns:
+/// - `Some(repeat_id)` and `2` if both paths share the same central repeat segment
+/// - `(None, 0)` if paths are malformed or mismatched
+fn extract_repeat_info(p1: &str, p2: &str) -> (Option<String>, usize) {
+    let repeat_1 = extract_middle_segment(p1);
+    let repeat_2 = extract_middle_segment(p2);
+
+    if let (Some(r1), Some(r2)) = (repeat_1, repeat_2) {
+        if r1 == r2 {
+            return (Some(r1), 2); // this pair contains 2 paths
+        }
+    }
+    (None, 0)
+}
+
+/// Extract the middle (repeat) segment from a path string.
+/// Assumes the path is made of three segments separated by direction indicators `<` or `>`.
+///
+/// Example:
+/// - Input: `"<u27>u25<u28"` → Output: `Some("u25")`
+fn extract_middle_segment(path: &str) -> Option<String> {
+    let split: Vec<&str> = path.split(['<', '>']).filter(|s| !s.is_empty()).collect();
+    if split.len() == 3 {
+        Some(split[1].to_string())
+    } else {
+        None
+    }
 }
 
 // need a function to:
 // - designate 2 in nodes, 2 out nodes
 // - identify if a path is reverse of another path
 fn output_repeat_lines(all_paths: Vec<Paths>) {
+    let mut revcomps = Vec::new();
+    let mut stdout = io::stdout();
+
     for paths in all_paths {
         let mut node_checker = Vec::new();
-        for ((s, p), c) in paths.paths.clone() {
-            for ((s2, p2), c2) in paths.paths.iter().skip(1) {
-                let is_reverse = p.is_reverse(p2.clone());
+
+        let path_vec = paths.paths;
+        let path_vec: Vec<_> = path_vec.to_vec();
+
+        for ((_, p), c) in path_vec.iter() {
+            for ((_, p2), c2) in path_vec.iter().skip(1) {
+                let is_reverse = p.is_reverse(p2);
                 // if we hit a reverse path, combine them
                 // and push to the node checker
                 if is_reverse
                     && !node_checker.contains(&p.to_string())
                     && !node_checker.contains(&p2.to_string())
                 {
-                    println!("{}:{}, {}:{}", p, c, p2, c2);
+                    revcomps.push((p.to_string(), *c, p2.to_string(), *c2));
                     node_checker.push(p.to_string());
                     node_checker.push(p2.to_string());
                 }
             }
         }
+    }
+    if !revcomps.is_empty() {
+        let _ = writeln!(stdout, "path_1\tcov_1\tpath_2\tcov_2\trecomb_score");
+        let mut recomb_scores = Vec::new();
+
+        for (p1, cov1, p2, cov2) in &revcomps {
+            let total = *cov1 as f64 + *cov2 as f64;
+            if total == 0.0 {
+                continue; // avoid division by zero
+            }
+            let rel1 = *cov1 as f64 / total;
+            let rel2 = *cov2 as f64 / total;
+            let score = 2.0 * rel1.min(rel2);
+            recomb_scores.push(score);
+            let _ = writeln!(stdout, "{}\t{}\t{}\t{}\t{:.3}", p1, cov1, p2, cov2, score);
+        }
+
+        let recomb_potential: f64 = if !recomb_scores.is_empty() {
+            recomb_scores.iter().sum::<f64>() / recomb_scores.len() as f64
+        } else {
+            0.0
+        };
+
+        let _ = writeln!(stdout, "\nRecombination potential: {:.3}", recomb_potential);
+        let rci = compute_rci(&revcomps);
+        let _ = writeln!(stdout, "RCI: {:.3}", rci);
     }
 }
 
@@ -136,7 +267,7 @@ impl Paths {
 
         // while the node ID is the same, push to inner
         // then push inner to out and reset inner
-        for (i, ((id, path), count)) in self.paths.iter().enumerate() {
+        for ((id, path), count) in self.paths.iter() {
             // if we have an empty inner, just push to it
             if inner.paths.is_empty() {
                 inner.paths.push(((id.clone(), path.clone()), *count));
@@ -203,7 +334,7 @@ impl Path {
     // u25	132	<u28<u25>u27 (reverse)
     // u25	126	<u27>u25>u28 (forward)
     // these two paths are reverses of one another
-    fn is_reverse(&self, other: Path) -> bool {
+    fn is_reverse(&self, other: &Path) -> bool {
         // the first and third orientations should differ, but should both have
         // the same segid
         let first_third_o = self.from().orientation != other.to().orientation;
@@ -288,7 +419,7 @@ mod tests {
         let path = string_to_path(s.to_string()).unwrap();
         let s2 = "<u27>u25>u28";
         let path2 = string_to_path(s2.to_string()).unwrap();
-        assert!(path.is_reverse(path2));
+        assert!(path.is_reverse(&path2));
     }
 
     #[test]
@@ -299,7 +430,7 @@ mod tests {
         let path = string_to_path(s.to_string()).unwrap();
         let path2 = string_to_path(s2.to_string()).unwrap();
 
-        assert!(!path.is_reverse(path2));
+        assert!(!path.is_reverse(&path2));
     }
 
     // test split into repeats
@@ -362,5 +493,112 @@ mod tests {
         assert!(split.len() == 2);
         assert_eq!(split[0].paths.len(), 8);
         assert_eq!(split[1].paths.len(), 8);
+    }
+
+    #[test]
+    fn test_extract_middle_segment_valid() {
+        let p = "<u27>u25<u28";
+        assert_eq!(extract_middle_segment(p), Some("u25".to_string()));
+    }
+
+    #[test]
+    fn test_extract_middle_segment_invalid() {
+        let p = ">u27<u25"; // Only two segments
+        assert_eq!(extract_middle_segment(p), None);
+    }
+
+    #[test]
+    fn test_extract_repeat_info_valid_pair() {
+        let (id, count) = extract_repeat_info("<u27>u25<u28", ">u26<u25>u27");
+        assert_eq!(id, Some("u25".to_string()));
+        assert_eq!(count, 2);
+    }
+
+    #[test]
+    fn test_extract_repeat_info_mismatch() {
+        let (id, count) = extract_repeat_info("<u27>u25<u28", ">u26<u24>u27");
+        assert_eq!(id, None);
+        assert_eq!(count, 0);
+    }
+
+    #[test]
+    fn test_compute_rci_balanced() {
+        let revcomps = vec![
+            // repeat node: u66
+            (
+                "<u67<u66>u65".to_string(),
+                100,
+                "<u65>u66>u67".to_string(),
+                100,
+            ),
+            // repeat node: u69
+            (
+                ">u65<u69<u68".to_string(),
+                80,
+                ">u68>u69<u65".to_string(),
+                80,
+            ),
+        ];
+
+        let rci = compute_rci(&revcomps);
+        eprintln!("RCI: {rci}");
+        assert!(rci > 0.0);
+        assert!((rci - 1.0).abs() < 0.1);
+
+        let revcomps = vec![
+            // Repeat node u66 (2 pairs → 4 paths total)
+            (
+                "<u67<u66>u65".to_string(),
+                100,
+                "<u65>u66>u67".to_string(),
+                100,
+            ),
+            (
+                "<u68<u66>u64".to_string(),
+                90,
+                "<u64>u66>u68".to_string(),
+                90,
+            ),
+            // Repeat node u69 (2 pairs → 4 paths total)
+            (
+                ">u65<u69<u68".to_string(),
+                80,
+                ">u68>u69<u65".to_string(),
+                80,
+            ),
+            (
+                ">u64<u69<u67".to_string(),
+                70,
+                ">u67>u69<u64".to_string(),
+                70,
+            ),
+        ];
+
+        let rci = compute_rci(&revcomps);
+        eprintln!("RCI: {rci}");
+        assert!(rci > 0.0);
+        assert!((rci - 2.0).abs() < 0.1); // 2 repeat nodes × log2(2) × score ~ 1.0
+    }
+
+    #[test]
+    fn test_compute_rci_unbalanced() {
+        let revcomps = vec![
+            (
+                "<u27>u25<u28".to_string(),
+                190,
+                ">u26<u25>u27".to_string(),
+                10,
+            ), // very unbalanced
+        ];
+
+        let rci = compute_rci(&revcomps);
+        assert!(rci < 0.5);
+    }
+
+    #[test]
+    fn test_compute_rci_empty() {
+        let revcomps = vec![];
+        let rci = compute_rci(&revcomps);
+        assert_eq!(rci, 0.0);
     }
 }

@@ -10,34 +10,42 @@ gfa_recomb <GFA>
 
 Including the `--gaf <GAF>` option iterates over the GAF to find alignments which span a focal node (only paths of length 3 considered at the moment). Example output is below.
 
+An example:
+
 ```
-ID	Count	Path
-u75	198	<u76>u75<u71
-u75	197	>u71<u75>u76
-u75	179	>u73>u75<u71
-u75	178	<u76>u75<u76
-u75	163	>u76<u75>u76
-u75	162	>u76<u75<u73
-u75	159	>u71<u75<u73
-u75	133	>u73>u75<u76
-u77	114	>u72>u77>u78
-u77	100	<u78<u77<u72
-u77	89	>u78<u77<u72
-u77	76	>u72>u77<u78
-u77	74	>u74>u77>u78
-u77	67	<u78<u77<u74
-u77	60	>u78<u77<u74
-u77	54	>u74>u77<u78
-u70	19	<u71>u70>u73
-u70	18	<u73<u70>u71
-u70	14	<u71>u70>u74
-u70	13	<u74<u70>u71
-u70	12	<u74<u70>u72
-u70	11	<u73<u70>u72
-u70	6	<u72>u70>u73
-u70	5	<u72>u70>u74
+gfa_recomb --gaf ./data/Arabidopsis_thaliana.gaf ./data/Arabidopsis_thaliana.mito.gfa
 ```
+Should give the following output.
+
+```
+path_1  cov_1   path_2  cov_2
+<u67<u66>u65    192     <u65>u66>u67    180
+<u68<u66>u64    168     <u64>u66>u68    162
+>u64<u69<u67    160     >u67>u69<u64    126
+>u65<u69<u68    159     >u68>u69<u65    147
+>u68>u69<u64    152     >u64<u69<u68    123
+```
+
+`path_1` and `path_2` are opposite traversals through the same putative repeat node, with approximately similar coverages in the case of `<u67<u66>u65`.
 
 ## Recombination metric of the GFA
 
-Using the above info, we can begin to assess the recombination potential of each assembly.
+I propose a new metric, RCI (recombination complexity index).
+
+This quantifies the potential for repeat-mediated structural variation in a genome assembly. It captures both the abundance and diversity of alternative paths through repeat nodes in a GFA graph.
+
+For a set of nodes, R:
+
+RCI = (1 / |R|) * sum over r [ S_r * log2(P_r) ]
+
+Where:
+- |R| is the number of distinct repeat nodes (focal segments)
+- P_r is the number of distinct paths through repeat node `r`
+- S_r is the average recombination score at repeat node `r`
+
+The recombination score at a repeat node, `r`.
+S = 2 * min(cov1 / (cov1 + cov2), cov2 / (cov1 + cov2))
+
+This value ranges from:
+- 1.0 → perfectly balanced recombination (equal path support)
+- 0.0 → only one path is supported (no recombination signal)
