@@ -1,16 +1,18 @@
 # Detect potential recombination points in plant mitochondrial genomes
 
-Using only information from incoming and outgoing nodes (ignoring orientation), and with some constraints, we can detect all bidirectionally bifurcating segments in a graph.
+Using only information from incoming and outgoing nodes and with some constraints, we can detect all bidirectionally bifurcating segments in a graph. We can use aligned reads to this graph to understand how potentially recombinationally active a genome is.
 
 ```bash
 # Simple CLI
 gfa_recomb <GFA>
+# add GAF
+gfa_recomb --gaf <GAF> <GFA>
 ```
 ## GraphAligner output
 
 Including the `--gaf <GAF>` option iterates over the GAF to find alignments which span a focal node (only paths of length 3 considered at the moment). Example output is below.
 
-An example:
+An example (real data in the `data` dir):
 
 ```
 gfa_recomb --gaf ./data/Arabidopsis_thaliana.gaf ./data/Arabidopsis_thaliana.mito.gfa
@@ -47,6 +49,7 @@ Where:
 - S_r is the average recombination score at repeat node `r`
 
 The recombination score at a repeat node, `r`.
+
 S = 2 * min(cov1 / (cov1 + cov2), cov2 / (cov1 + cov2))
 
 This value ranges from:
