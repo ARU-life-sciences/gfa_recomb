@@ -18,12 +18,15 @@ gfa_recomb --gaf ./data/Arabidopsis_thaliana.gaf ./data/Arabidopsis_thaliana.mit
 Should give the following output.
 
 ```
-path_1  cov_1   path_2  cov_2
-<u67<u66>u65    192     <u65>u66>u67    180
-<u68<u66>u64    168     <u64>u66>u68    162
->u64<u69<u67    160     >u67>u69<u64    126
->u65<u69<u68    159     >u68>u69<u65    147
->u68>u69<u64    152     >u64<u69<u68    123
+path_1  cov_1   path_2  cov_2   recomb_score
+<u67<u66>u65    192     <u65>u66>u67    180     0.968
+<u68<u66>u64    168     <u64>u66>u68    162     0.982
+>u64<u69<u67    160     >u67>u69<u64    126     0.881
+>u65<u69<u68    159     >u68>u69<u65    147     0.961
+>u68>u69<u64    152     >u64<u69<u68    123     0.895
+
+Recombination potential: 0.937
+RCI: 2.154
 ```
 
 `path_1` and `path_2` are opposite traversals through the same putative repeat node, with approximately similar coverages in the case of `<u67<u66>u65`.
