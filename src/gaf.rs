@@ -5,23 +5,12 @@ use gfa::{
     gfa::Orientation,
     optfields::OptField,
 };
+use std::f64::consts::LN_2;
 use std::io::{self, Write};
 use std::{collections::HashMap, fmt::Display, fs::File, io::BufReader, path::PathBuf};
 
-// Example paths from one segment
-// define 'repeat' as always on +ve segment
-// enumerate In 1, In 2, Out 1, Out 2
-// in both forward and reverse orientations
-//
-// u25	132	<u28<u25>u27 (reverse)
-// u25	126	<u27>u25<u28 (forward)
-// u25	126	<u27>u25>u28 (forward)
-// u25	120	>u28<u25>u26 (reverse)
-// u25	119	>u28<u25>u27 (reverse)
-// u25	115	<u26>u25<u28 (forward)
-// u25	107	<u28<u25>u26 (reverse)
-// u25	101	<u26>u25>u28 (forward)
-
+/// Parses a GAF file and extracts all 3-node paths through specified repeat nodes.
+/// Counts and groups them by focal repeat segment for recombination analysis.
 pub fn count_gaf_paths(gaf_path: PathBuf, nodes: Vec<String>) -> Result<()> {
     let file = File::open(gaf_path).unwrap();
     let lines = BufReader::new(file).byte_lines();
@@ -62,14 +51,68 @@ pub fn count_gaf_paths(gaf_path: PathBuf, nodes: Vec<String>) -> Result<()> {
         }
     }
 
-    let mut paths: Vec<(&(String, String), &i32)> = paths.iter().collect();
-    paths.sort_by(|a, b| b.1.cmp(a.1));
+    let paths: Vec<(&(String, String), &i32)> = paths.iter().collect();
 
     let paths = Paths::from_vec(paths).split_into_repeats();
 
+    let entropy = compute_path_entropy(&paths);
     output_repeat_lines(paths);
 
+    // format entropy
+    let mut stdout = io::stdout();
+    let _ = writeln!(stdout, "\nRepeat node\tPath count\tEntropy");
+    for (node, path_length, entropy) in entropy.1 {
+        let _ = writeln!(stdout, "{}\t{}\t{:.3}", node, path_length, entropy);
+    }
+    let _ = writeln!(stdout, "\nMean entropy: {:.3}", entropy.0);
+
     Ok(())
+}
+
+/// Compute the Shannon entropy of path usage for each repeat node.
+/// This reflects the diversity of path usage through each focal repeat.
+///
+/// For each repeat node:
+/// - Count all distinct 3-node paths
+/// - Sum their coverages
+/// - Compute entropy:
+///   H = -sum(p_i * log2(p_i)) over all paths i
+///
+/// Returns:
+/// - (mean_entropy, Vec<(repeat_id, path_count, entropy)>)
+fn compute_path_entropy(groups: &[Paths]) -> (f64, Vec<(String, usize, f64)>) {
+    let mut entropies = Vec::new();
+
+    for group in groups {
+        if group.paths.is_empty() {
+            continue;
+        }
+
+        let repeat_id = &group.paths[0].0 .0; // all paths share this repeat node
+        let total_cov: f64 = group.paths.iter().map(|(_, c)| *c as f64).sum();
+
+        if total_cov == 0.0 {
+            continue;
+        }
+
+        let mut entropy = 0.0;
+        for (_, cov) in &group.paths {
+            let p = *cov as f64 / total_cov;
+            if p > 0.0 {
+                entropy -= p * (p.ln() / LN_2);
+            }
+        }
+
+        entropies.push((repeat_id.clone(), group.paths.len(), entropy));
+    }
+
+    let mean_entropy = if !entropies.is_empty() {
+        entropies.iter().map(|(_, _, e)| *e).sum::<f64>() / entropies.len() as f64
+    } else {
+        0.0
+    };
+
+    (mean_entropy, entropies)
 }
 
 /// Compute the Recombination Complexity Index (RCI) from a list of recombination path pairs.
@@ -99,8 +142,6 @@ pub fn count_gaf_paths(gaf_path: PathBuf, nodes: Vec<String>) -> Result<()> {
 /// * `f64` - The recombination complexity index (RCI)
 ///
 fn compute_rci(revcomps: &Vec<(String, i32, String, i32)>) -> f64 {
-    use std::f64::consts::LN_2;
-
     // Map of repeat node ID to its recombination scores and path count
     let mut repeat_groups: HashMap<String, (Vec<f64>, usize)> = HashMap::new();
 
@@ -182,9 +223,10 @@ fn extract_middle_segment(path: &str) -> Option<String> {
     }
 }
 
-// need a function to:
-// - designate 2 in nodes, 2 out nodes
-// - identify if a path is reverse of another path
+/// Identifies reverse-complement path pairs within each repeat group, computes their
+/// recombination score, prints all path pairs with scores, and reports:
+/// - The mean recombination potential
+/// - The recombination complexity index (RCI)
 fn output_repeat_lines(all_paths: Vec<Paths>) {
     let mut revcomps = Vec::new();
     let mut stdout = io::stdout();
@@ -259,37 +301,17 @@ impl Paths {
         Self::new(paths)
     }
 
-    // function to split the vec into multipe subsets, each of
-    // length 8, corresponding to the repeat node
+    /// Groups path+coverage entries by focal repeat node ID.
+    /// Assumes the list is sorted and that paths from the same node appear contiguously.
     fn split_into_repeats(&self) -> Vec<Paths> {
-        let mut out: Vec<Paths> = Vec::new();
-        let mut inner = Paths::new(Vec::new());
+        let mut grouped: HashMap<String, Vec<((String, Path), i32)>> = HashMap::new();
 
-        // while the node ID is the same, push to inner
-        // then push inner to out and reset inner
-        for ((id, path), count) in self.paths.iter() {
-            // if we have an empty inner, just push to it
-            if inner.paths.is_empty() {
-                inner.paths.push(((id.clone(), path.clone()), *count));
-            } else {
-                let last = inner.paths.last().unwrap();
-                if last.0 .0 == id.clone() {
-                    inner.paths.push(((id.clone(), path.clone()), *count));
-                } else {
-                    out.push(inner);
-                    inner = Paths::new(Vec::new());
-                    inner.paths.push(((id.clone(), path.clone()), *count));
-                }
-            }
+        for entry in &self.paths {
+            let repeat_id = entry.0 .0.clone();
+            grouped.entry(repeat_id).or_default().push(entry.clone());
         }
 
-        // if there's only one id present, we never reach to pushing to
-        // out, so account for that here
-        if !inner.paths.is_empty() {
-            out.push(inner);
-        }
-
-        out
+        grouped.into_values().map(Paths::new).collect()
     }
 }
 
@@ -367,6 +389,8 @@ impl Default for Segment {
     }
 }
 
+/// Parses a string representation of a 3-segment path (e.g. ">u28<u25>u26") into a Path object.
+/// Validates directionality (< or >) and ensures exactly 3 segments. Returns an error if malformed.
 fn string_to_path(s: String) -> Result<Path> {
     let mut out: [Segment; 3] = core::array::from_fn(|_| Segment::default());
 
@@ -600,5 +624,60 @@ mod tests {
         let revcomps = vec![];
         let rci = compute_rci(&revcomps);
         assert_eq!(rci, 0.0);
+    }
+
+    #[test]
+    fn test_compute_path_entropy_single_node() {
+        let paths = Paths::new(vec![
+            (
+                ("u66".into(), string_to_path("<u67<u66>u65".into()).unwrap()),
+                100,
+            ),
+            (
+                ("u66".into(), string_to_path("<u65>u66>u67".into()).unwrap()),
+                100,
+            ),
+            (
+                ("u66".into(), string_to_path("<u68<u66>u64".into()).unwrap()),
+                50,
+            ),
+        ]);
+
+        let (mean_entropy, details) = compute_path_entropy(&[paths]);
+
+        assert!((mean_entropy > 1.0) && (mean_entropy < 2.0));
+        assert_eq!(details.len(), 1);
+        assert_eq!(details[0].0, "u66");
+        assert_eq!(details[0].1, 3);
+        assert!(details[0].2 > 1.0); // entropy should be positive
+    }
+
+    #[test]
+    fn test_split_into_repeats_merges_by_repeat_id() {
+        let paths = Paths::new(vec![
+            (
+                ("u66".into(), string_to_path("<u67<u66>u65".into()).unwrap()),
+                100,
+            ),
+            (
+                ("u69".into(), string_to_path(">u65<u69<u67".into()).unwrap()),
+                175,
+            ),
+            (
+                ("u66".into(), string_to_path("<u65>u66>u67".into()).unwrap()),
+                180,
+            ),
+            (
+                ("u69".into(), string_to_path(">u67>u69<u65".into()).unwrap()),
+                171,
+            ),
+        ]);
+
+        let merged = paths.split_into_repeats();
+
+        assert_eq!(merged.len(), 2);
+        let mut ids: Vec<String> = merged.iter().map(|p| p.paths[0].0 .0.clone()).collect();
+        ids.sort();
+        assert_eq!(ids, vec!["u66", "u69"]);
     }
 }
