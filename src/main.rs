@@ -9,6 +9,8 @@ mod gfa;
 
 fn cli() -> ArgMatches {
     command!()
+        .arg_required_else_help(true)
+        .help_template("{name}: v{version}\n{about}\n\n{all-args}")
         .about("A Bidirected Repeat Path Enumerator")
         .arg(arg!(<GFA> "Input file in GFA format.").value_parser(value_parser!(PathBuf)))
         .arg(
