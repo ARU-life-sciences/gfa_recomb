@@ -61,10 +61,11 @@ pub fn count_gaf_paths(gaf_path: PathBuf, nodes: Vec<String>) -> Result<()> {
     // format entropy
     let mut stdout = io::stdout();
     let _ = writeln!(stdout, "\nRepeat node\tPath count\tEntropy");
-    for (node, path_length, entropy) in entropy.1 {
+    for (node, path_length, entropy) in entropy.2 {
         let _ = writeln!(stdout, "{}\t{}\t{:.3}", node, path_length, entropy);
     }
     let _ = writeln!(stdout, "\nMean entropy: {:.3}", entropy.0);
+    let _ = writeln!(stdout, "Total entropy: {:.3}", entropy.1);
 
     Ok(())
 }
@@ -80,7 +81,7 @@ pub fn count_gaf_paths(gaf_path: PathBuf, nodes: Vec<String>) -> Result<()> {
 ///
 /// Returns:
 /// - (mean_entropy, Vec<(repeat_id, path_count, entropy)>)
-fn compute_path_entropy(groups: &[Paths]) -> (f64, Vec<(String, usize, f64)>) {
+fn compute_path_entropy(groups: &[Paths]) -> (f64, f64, Vec<(String, usize, f64)>) {
     let mut entropies = Vec::new();
 
     for group in groups {
@@ -106,13 +107,14 @@ fn compute_path_entropy(groups: &[Paths]) -> (f64, Vec<(String, usize, f64)>) {
         entropies.push((repeat_id.clone(), group.paths.len(), entropy));
     }
 
+    let total_entropy = entropies.iter().map(|(_, _, e)| *e).sum::<f64>();
     let mean_entropy = if !entropies.is_empty() {
         entropies.iter().map(|(_, _, e)| *e).sum::<f64>() / entropies.len() as f64
     } else {
         0.0
     };
 
-    (mean_entropy, entropies)
+    (mean_entropy, total_entropy, entropies)
 }
 
 /// Compute the Recombination Complexity Index (RCI) from a list of recombination path pairs.
@@ -643,7 +645,7 @@ mod tests {
             ),
         ]);
 
-        let (mean_entropy, details) = compute_path_entropy(&[paths]);
+        let (mean_entropy, _total_entropy, details) = compute_path_entropy(&[paths]);
 
         assert!((mean_entropy > 1.0) && (mean_entropy < 2.0));
         assert_eq!(details.len(), 1);
