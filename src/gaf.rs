@@ -55,17 +55,8 @@ pub fn count_gaf_paths(gaf_path: PathBuf, nodes: Vec<String>) -> Result<()> {
 
     let paths = Paths::from_vec(paths).split_into_repeats();
 
-    let entropy = compute_path_entropy(&paths);
-    output_repeat_lines(paths);
-
-    // format entropy
-    let mut stdout = io::stdout();
-    let _ = writeln!(stdout, "\nRepeat node\tPath count\tEntropy");
-    for (node, path_length, entropy) in entropy.2 {
-        let _ = writeln!(stdout, "{}\t{}\t{:.3}", node, path_length, entropy);
-    }
-    let _ = writeln!(stdout, "\nMean entropy: {:.3}", entropy.0);
-    let _ = writeln!(stdout, "Total entropy: {:.3}", entropy.1);
+    output_repeat_lines(&paths);
+    output_entropy_lines(&paths, false);
 
     Ok(())
 }
@@ -81,7 +72,10 @@ pub fn count_gaf_paths(gaf_path: PathBuf, nodes: Vec<String>) -> Result<()> {
 ///
 /// Returns:
 /// - (mean_entropy, Vec<(repeat_id, path_count, entropy)>)
-fn compute_path_entropy(groups: &[Paths]) -> (f64, f64, Vec<(String, usize, f64)>) {
+fn output_entropy_lines(
+    groups: &[Paths],
+    test: bool,
+) -> Option<(f64, f64, Vec<(String, usize, f64)>)> {
     let mut entropies = Vec::new();
 
     for group in groups {
@@ -114,7 +108,23 @@ fn compute_path_entropy(groups: &[Paths]) -> (f64, f64, Vec<(String, usize, f64)
         0.0
     };
 
-    (mean_entropy, total_entropy, entropies)
+    if !entropies.is_empty() {
+        let mut stdout = io::stdout();
+        let _ = writeln!(stdout, "\nrepeat_node\tpath_count\tentropy");
+        for (node, path_length, entropy) in &entropies {
+            let _ = writeln!(stdout, "{}\t{}\t{:.3}", node, path_length, entropy);
+        }
+        let _ = writeln!(stdout, "\nMean entropy: {:.3}", mean_entropy);
+        let _ = writeln!(stdout, "Total entropy: {:.3}", total_entropy);
+        // for internal testing
+        if test {
+            return Some((mean_entropy, total_entropy, entropies));
+        } else {
+            return None;
+        }
+    }
+
+    None
 }
 
 /// Compute the Recombination Complexity Index (RCI) from a list of recombination path pairs.
@@ -229,14 +239,14 @@ fn extract_middle_segment(path: &str) -> Option<String> {
 /// recombination score, prints all path pairs with scores, and reports:
 /// - The mean recombination potential
 /// - The recombination complexity index (RCI)
-fn output_repeat_lines(all_paths: Vec<Paths>) {
+fn output_repeat_lines(all_paths: &[Paths]) {
     let mut revcomps = Vec::new();
     let mut stdout = io::stdout();
 
     for paths in all_paths {
         let mut node_checker = Vec::new();
 
-        let path_vec = paths.paths;
+        let path_vec = &paths.paths;
         let path_vec: Vec<_> = path_vec.to_vec();
 
         for ((_, p), c) in path_vec.iter() {
@@ -645,7 +655,7 @@ mod tests {
             ),
         ]);
 
-        let (mean_entropy, _total_entropy, details) = compute_path_entropy(&[paths]);
+        let (mean_entropy, _total_entropy, details) = output_entropy_lines(&[paths], true).unwrap();
 
         assert!((mean_entropy > 1.0) && (mean_entropy < 2.0));
         assert_eq!(details.len(), 1);
